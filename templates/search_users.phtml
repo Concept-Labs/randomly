@@ -1,0 +1,123 @@
+<?php 
+$row_user_search = $this->get('row_user_search');
+$row_users_coment = $this->get('row_users_coment');
+$now_date = date('Y-m-d');
+$year_user = $now_date - $row_user_search['date_birth'];
+$row_user = $this->get('row_user');
+$num_user_gallery = $this->get('num_user_gallery');
+$row_user_gallery = $this->get('row_user_gallery');
+$row_more_info = $this->get('row_more_info');
+$_SESSION['email_recipient'] = $row_user_search['email']; 
+if (isset($row_user['language'])) {
+	$lang = $row_user['language'];
+	$path = 'language/'.$lang.'/templates/search_users.phtml';
+	require($path);	
+
+} else {
+	require_once('language/ru/templates/search_users.phtml');
+}
+?>
+
+<div class="search_users_page">
+	<div class="search_users_block">
+		<div class="avatar_search_users">
+			<?php if ($num_user_gallery != 0 || !empty($row_user_search['avatar_user'])) { ?>
+			<ul id="lightSlider">
+				<?php if (!empty($row_user_search['avatar_user'])) {
+					$avatar_user = $row_user_search['avatar_user']; ?>
+					<li class="contentPost" data-thumb="<?php echo '../gallery/users/avatars/'.$avatar_user; ?>" data-src="<?php echo '../gallery/users/avatars/'.$avatar_user; ?>">
+						<img src="<?php echo '../gallery/users/avatars/'.$avatar_user; ?>" />
+					</li>
+					<?php } ?>					
+					<?php foreach ($row_user_gallery as $value) { ?>
+					<li class="contentPost" data-thumb="<?php echo '../gallery/users/'.$value['2']; ?>" data-src="<?php echo '../gallery/users/'.$value['2']; ?>">
+						<img src="<?php echo '../gallery/users/'.$value['2']; ?>" />
+					</li>
+
+					<?php } ?>
+				</ul>
+				<?php }
+				else { ?>
+				<img src="../img/noavatar.png" />
+				<?php } ?>
+			</div>
+			<div class="name_block">
+				<div id="like_users"> </div>
+				
+				<h2><?php echo $row_user_search['name']; ?><span class="search_subscribe"> </span></h2>
+				<br>
+				<?php if (!empty($row_user_search['nickname'])) {
+					echo '<h3>'.$row_user_search['nickname'].'</h3><br>';
+				} ?>			
+
+				<p class="left_block_age"><a href="#" class="search_gift"><i class="fas fa-gift"></i></a> <?php echo $year_user; ?> years <span class="search_ponty">1245 <i style="color: #FFD700;" class="fas fa-coins"></i></span></p>
+				<div class="search_users_more" id="h0">
+					<a href="#" onClick="document.getElementById('h0').style.display='none';document.getElementById('h1').style.display='';return false;"><span><?php echo $more_information_search; ?> <i class="fas fa-angle-down"></i></span></a>
+				</div>     
+				<div class="search_users_more" id="h1" style="display:none">
+					<table>
+						<tr>
+							<td><?php echo $sm; ?>: <?php if (!empty($row_more_info['sharp'])) {
+								echo $row_more_info['sharp'].' см';
+							} else { echo $not_specified; }?></td>
+							<td><?php echo $kg; ?>: <?php if (!empty($row_more_info['weight'])) {
+								echo $row_more_info['weight'].' кг';
+							} else { echo $not_specified; }?></td>
+						</tr>
+						<tr>
+							<td><?php echo $color_eyes; ?>: <?php if (!empty($row_more_info['eyes'])) {
+								echo $row_more_info['eyes'];
+							} else { echo $not_specified; } ?></td>
+							<td><?php echo $color_heir; ?>: <?php if (!empty($row_more_info['hair'])) {
+								echo $row_more_info['hair'];
+							} else { echo $not_specified; } ?></td>
+						</tr>
+					
+					</table>
+					<table>
+							<tr>
+							<td><?php echo $hobby; ?>: <?php if (!empty($row_more_info['hobby'])) {
+								echo $row_more_info['hobby'];
+							} else { echo $not_specified; } ?></td>
+						</tr>
+						<tr>
+							<td><?php echo $purpose_life; ?>: <?php if (!empty($row_more_info['purpose_life'])) {
+								echo $row_more_info['purpose_life'];
+							} else { echo $not_specified; } ?></td>
+						</tr>
+						<tr>
+							<td><?php echo $religion; ?>: <?php if (!empty($row_more_info['religion'])) {
+								echo $row_more_info['religion'];
+							} else { echo $not_specified; } ?></td>
+						</tr>
+					</table>
+
+					<a onClick="document.getElementById('h1').style.display='none';document.getElementById('h0').style.display='';return false;"><span><?php echo $more_information_search_close; ?> <i class="fas fa-angle-up"></i></span></a>
+				</div>
+			</div>
+			<?php if (!empty($row_users_coment['coment_user'])): ?>
+				<div class="coment_block">
+					<p><?php echo $row_users_coment['coment_user']; ?></p>
+				</div>	
+			<?php endif ?>
+			<div class="wish_block">
+				<form action="<?php echo base_url .'search_users';?>" method="post">
+					<input type="submit" name="become_acquainted" value="<?php echo $button_1; ?>">
+
+					<input type="submit" name="stroll" value="<?php echo $button_2; ?>">
+
+					<input type="submit" name="sleep" value="<?php echo $button_3; ?>">
+				</form>
+			</div>
+			<button class="transition" style="border:0;" onclick="location.reload();">
+				<div class="next_user">
+					<i class="fas fa-angle-right"></i>
+				</div>
+			</button>
+
+			<script>
+				like_users();
+				setInterval(like_users,3000);
+				subscription_users();
+				setInterval(subscription_users,3000);
+			</script>

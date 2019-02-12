@@ -1,0 +1,83 @@
+<?php 
+$row_user = $this->get('row_user');
+if (isset($row_user['language'])) {
+	$lang = $row_user['language'];
+	$path = 'language/'.$lang.'/templates/find_friends.phtml';
+	require($path);	
+
+} else {
+	require_once('language/ru/templates/find_friends.phtml');
+}
+?>
+
+<h3 class="search_person"><?php echo $goodluck_find; ?></h3>
+<div class="right_block right_sidebar find_friend">
+	<p><?php echo $find_friend_family; ?></p>
+	<div class="block_in_rightblock">
+
+		<input class="find_friends" type="search" name="search_friends_query" placeholder="<?php echo $input_name; ?>"> 
+		<div class="btn_find_friends">
+			<button id="close_find_friends" onclick="close_find_friends()"><?php echo $cancel_find_friends; ?></button>
+			<button name="search_friends" class="find_friend" onclick="open_find_friends();"><i class="fas fa-search"></i></button>
+		</div>
+	</div>
+	<br>
+	<div id="new_find_friends_block">
+		<p style="float: left; width: 100%;"><?php echo $description_find; ?></p>
+		<form action="<?php echo base_url .'search_users';?>" method="post">
+			<p class="container_output">/200</p><p class="container_output" id="countchar-output"></p>
+			<textarea name="coment_search" data-countchar="" data-countchar-limit="200" rows="3" maxlength="200" 	 placeholder="<?php echo $textarea_find; ?>"></textarea>
+			<a href="#" class="tooltip tooltip-left" data-tooltip='<?php echo $tooltip_find; ?>'><i class="fas fa-exclamation-circle"></i></a>
+
+			<div class="search_users">
+				<div>
+					<p><?php echo $city_find; ?></p>
+					<select name="city_search" required>
+						<option value="all">Вся Украина</option>
+						<option value="Kyiv">Киев</option>
+						<option value="Lviv">Львов</option>
+					</select>
+					<br><br>
+					<p><?php echo $age_find; ?></p>
+					<select name="age_search" required>
+						<option value="0"><?php echo $all_age; ?></option>
+						<option value="18">18-23</option>
+						<option value="23">23-28</option>
+					</select>
+					<br><br>
+					<p><?php echo $orientation; ?></p>						
+					<select name="orientation_search" required>
+						<option value="all"><?php echo $all_orientation; ?></option>
+						<option value="heterosexual"><?php echo $heterosexual; ?></option>
+						<?php if ($row_user['sex'] == 0) {?>
+						<option value="lesbian"><?php echo $lesbian; ?></option>	
+						<?php } elseif ($row_user['sex'] == 1) {?>
+						<option value="gay"><?php echo $gay; ?></option>
+						<?php } ?>
+						<option value="beesexual"><?php echo $bi; ?></option>
+					</select>		
+					<br>
+					<br>
+					<input type="submit" name="search_new_friend" value=<?php echo $button_find; ?>>
+				</div>
+			</div>
+		</form>
+	</div>
+	
+	<div class="find_friends_page" style="display: none;">
+		<p><?php echo $find_request; ?></p>
+		<div class="find_friend_block">					
+			<div class="ava_friend">
+				<img src="../img/pol.jpg">
+			</div>
+			<div class="information_friend">
+				<h3>Васька</h3>
+				<span>20 year</span>
+				<span>Кийов</span>
+			</div>	
+			<div class="add_friend">
+				<button><?php echo $subscribe; ?></button>
+			</div>							
+		</div>
+	</div>
+</div>

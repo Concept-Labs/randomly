@@ -1,0 +1,25 @@
+<?php 
+if ($_SERVER['REQUEST_URI'] != '/search_users') {
+	$db = $this->registry->get('db');
+	$user_email = $_SESSION['login'];
+	$query_user = "SELECT * FROM `registered_users` WHERE email='$user_email'";
+	$result_user = mysqli_query($db, $query_user);
+	$row_user = mysqli_fetch_array($result_user); 
+	if (isset($row_user['language'])) {
+		$lang = $row_user['language'];
+		$path = 'language/'.$lang.'/templates/rightblock.phtml';
+		require($path);	
+
+	} else {
+		require_once('language/ru/templates/rightblock.phtml');
+	}
+	?>
+	<div class="right_sideblock">
+		<div id="hide_pyramid"> </div>
+		<script>
+			hide_pyramid();
+		</script>
+
+	</div>
+	
+	<?php } ?>

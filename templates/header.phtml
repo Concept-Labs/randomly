@@ -1,0 +1,179 @@
+<?php 
+$db = $this->registry->get('db');
+$user_email_header = $_SESSION['login'];
+$query_user_header = "SELECT * FROM `registered_users` WHERE email='$user_email_header'";
+$result_user_header = mysqli_query($db, $query_user_header);
+$row_user_header = mysqli_fetch_array($result_user_header); 
+$now_date = date('Y-m-d');
+$year_user = $now_date - $row_user['date_birth'];
+if (isset($row_user_header['language'])) {
+	$lang_header = $row_user_header['language'];
+	$path_header = 'language/'.$lang_header.'/templates/header.phtml';
+	require($path_header);	
+
+} else {
+	require_once('language/ru/templates/header.phtml');
+}
+?>
+<header>
+	<div class="head_right_block">
+		<div class="log_out">
+			<a href="<?php echo base_url .'authorization/logout';?>"><?php echo $exit; ?></a>
+		</div>
+		<div class="key log_out">
+			<a href="#"> 10550 <i style="color: #FFD700;" class="fas fa-coins"></i></a>
+		</div>
+		<div class="log_out">
+			<a id="notif_icon" onclick="open_notification_block()"><i class="fas fa-concierge-bell"></i><div class="notification">34</div></a>
+			<a style="display: none;" id="notif_icon_close" onclick="close_notification_block()"><i class="fas fa-concierge-bell"></i></a>
+		</div>
+	</div>
+	<div class="middle">
+		<div id="logo" class="logo">
+			<a href="<?php echo base_url;?>">
+				<div>RdFate</div><img src="../img/icon.png">
+			</a>		
+		</div>
+		{{$headerMenu}}
+	</div>	
+</header>
+
+
+<div class="square">
+</div>
+<div class="square_shadow">
+</div>
+<div class="notification_block">
+
+	<div>
+		<div class="notification_group">
+			<h3>Ви сподобалися</h3>
+			<div class="subscribe_people">
+				<div class="subscribe_people_ava">
+					<img src="../img/rain.jpg">
+				</div>
+				<div class="subscribe_people_name notification_info">
+					<h3>Галина</h3>
+					<p>23 березня о 21:30</p>
+				</div>
+			</div>
+		</div>
+		<div class="notification_group">
+			<h3>Ви сподобалися</h3>
+			<div class="subscribe_people">
+				<div class="subscribe_people_ava">
+					<img src="../img/rain.jpg">
+				</div>
+				<div class="subscribe_people_name notification_info">
+					<h3>Галина</h3>
+					<p>23 березня о 21:30</p>
+				</div>
+			</div>
+		</div>
+		<div class="notification_group">
+			<h3>Ви сподобалися</h3>
+			<div class="subscribe_people">
+				<div class="subscribe_people_ava">
+					<img src="../img/rain.jpg">
+				</div>
+				<div class="subscribe_people_name notification_info">
+					<h3>Галина</h3>
+					<p>23 березня о 21:30</p>
+				</div>
+			</div>
+		</div>
+		<div class="notification_group">
+			<h3>Ви сподобалися</h3>
+			<div class="subscribe_people">
+				<div class="subscribe_people_ava">
+					<img src="../img/rain.jpg">
+				</div>
+				<div class="subscribe_people_name notification_info">
+					<h3>Галина</h3>
+					<p>23 березня о 21:30</p>
+				</div>
+			</div>
+		</div>
+		<div class="notification_group">
+			<h3>Ви сподобалися</h3>
+			<div class="subscribe_people">
+				<div class="subscribe_people_ava">
+					<img src="../img/rain.jpg">
+				</div>
+				<div class="subscribe_people_name notification_info">
+					<h3>Галина</h3>
+					<p>23 березня о 21:30</p>
+				</div>
+			</div>
+		</div>
+		<div class="notification_group">
+			<h3>Ви сподобалися</h3>
+			<div class="subscribe_people">
+				<div class="subscribe_people_ava">
+					<img src="../img/rain.jpg">
+				</div>
+				<div class="subscribe_people_name notification_info">
+					<h3>Галина</h3>
+					<p>23 березня о 21:30</p>
+				</div>
+			</div>
+		</div>
+		<div class="notification_group">
+			<h3>Ви сподобалися</h3>
+			<div class="subscribe_people">
+				<div class="subscribe_people_ava">
+					<img src="../img/rain.jpg">
+				</div>
+				<div class="subscribe_people_name notification_info">
+					<h3>Галина</h3>
+					<p>23 березня о 21:30</p>
+				</div>
+			</div>
+		</div>
+		<div class="notification_group">
+			<h3>Ви сподобалися</h3>
+			<div class="subscribe_people">
+				<div class="subscribe_people_ava">
+					<img src="../img/rain.jpg">
+				</div>
+				<div class="subscribe_people_name notification_info">
+					<h3>Галина</h3>
+					<p>23 березня о 21:30</p>
+				</div>
+			</div>
+			<div class="subscribe_people">
+				<div class="subscribe_people_ava">
+					<img src="../img/rain.jpg">
+				</div>
+				<div class="subscribe_people_name notification_info">
+					<h3>Галина</h3>
+					<p>23 березня о 21:30</p>
+				</div>
+			</div>
+			<div class="subscribe_people">
+				<div class="subscribe_people_ava">
+					<img src="../img/rain.jpg">
+				</div>
+				<div class="subscribe_people_name notification_info">
+					<h3>Галина</h3>
+					<p>23 березня о 21:30</p>
+				</div>
+			</div>
+
+		</div>
+		<div class="notification_group">
+			<h3>Ви сподобалися</h3>
+			<div class="subscribe_people">
+				<div class="subscribe_people_ava">
+					<img src="../img/rain.jpg">
+				</div>
+				<div class="subscribe_people_name notification_info">
+					<h3>Галина</h3>
+					<p>23 березня о 21:30</p>
+				</div>
+			</div>
+		</div>
+
+	</div>
+
+</div>

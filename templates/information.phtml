@@ -1,0 +1,16 @@
+<?php 
+$current = $_SERVER['REQUEST_URI'];
+$row_user = $this->get('row_user');
+if (isset($row_user['language'])) {
+	$lang = $row_user['language'];
+	$path = 'language/'.$lang.'/templates/information.phtml';
+	require($path);	
+
+} else {
+	require_once('language/ru/templates/information.phtml');
+}
+?>
+
+<div class="right_block">
+	
+</div>

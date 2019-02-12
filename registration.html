@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Registration</title>
+	<link rel="stylesheet" href="styles/registration.css">
+	<link rel="stylesheet" href="styles/style.css">
+	<link rel="stylesheet" href="styles/select.css">
+	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp" crossorigin="anonymous">
+	<script type="text/javascript" src="js/select.js"></script>
+</head>
+<body class="registration">
+	<div class="registration">
+		<div class="adult">
+			<h3>Вход строго 18+</h3>
+		</div>
+		<div class="langbar">
+			<?php $redirect = 'http://' . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI']; ?>
+			<form action="/index" method="post" enctype="multipart/form-data">
+				<ul class="lang"><i class="fas fa-globe"></i>   <?php echo $language; ?>         <i class="fas fa-chevron-down"></i>
+					<ul class="sub-lang">
+						<li><button type="submit" name="ru" value="ru">Русский</button></li>
+						<li><button type="submit" name="en" value="en">English</button></li>
+						<li><button type="submit" name="ua" value="ua">Українська</button></li>
+					</ul>
+				</ul>
+				<input type="hidden" name="redirect" value="<?php echo $redirect;?>">
+			</form>
+		</div> 
+		<div class="registration_block">
+			<div class="reg_block_left">
+				<div class="reg_block_left_overlay">
+					<div class="reg_block_left_overlay_content">
+						<h2>Приветствуем дорогой гость!</h2>
+						<br>
+						<p>Вы посетили сайт Randomly, здесь Вы можете поиграть с судьбой или же найти её. У человека есть три главных желания, которых он хотел бы сделать с противоположным полом, и Randomly Вам это предоставит. С помощью нашего портала Вы сможете найти своих единомышленников не стесняясь их об этом спросить, так как они сами Вас выберут и напишут Вам.
+							<br><br>
+							Удачи в поисках СУДЬБЫ!
+						</p>
+						<div class="reg_block_left_footer">
+							<p>©Randomly - Design by BULYK | Code by BULAVA</p>
+						</div>
+					</div>	
+				</div>
+			</div>
+			<div class="reg_block_right">
+				<h3>Для начала игры с судьбой, мы зададим Вам несколько вопросов.</h3>
+				<br>
+				<p>Кем родила Вас мать?</p>
+				<form action="#">
+					<select class="turnintodropdown" required>
+						<option>Выберите пол</option>
+						<option>Мужчиной</option>
+						<option>Женщиной</option>
+					</select>
+			
+				<br><br>
+				<p>Как Вас назвали?</p>
+				
+				<input type="text" placeholder="Ваше имя" required>
+				<br><br>
+				<input type="email" placeholder=" Ваш email" required>
+				<br><br>
+				<p>Когда Вы родились?</p>
+				<select name="" id="">
+
+				</select>
+				<br><br>
+				<p>Ваша ориентация?</p>
+				<br>
+			
+					<select class="turnintodropdown" required>
+						<option>Выберите ориентацию</option>
+						<option>Гетеросексуал</option>
+						<option>Лесбиянка</option>
+						<option>Гей</option>
+						<option>Би</option>
+					</select>
+				
+				<br><br>
+				<input type="submit" value="зарегистрироватся">
+				</form>
+				<br>
+				<p class="privat_policy">Нажимая кнопку зарегистрироватся Вы соглашаетесь с нашей <a href="#">политикой конфиденциальности!</a></p>
+				<span><a href="#">У меня уже есть аккаунт!</a></span>
+			</div>
+		</div>
+	</div>
+</body>
+</html>

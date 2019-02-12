@@ -1,0 +1,182 @@
+<?php 
+$current = $_SERVER['REQUEST_URI'];
+define('url_page', 'http://' . $_SERVER['HTTP_HOST'] . $current);
+$row_user = $this->get('row_user');
+if (isset($row_user['language'])) {
+	$lang = $row_user['language'];
+	$path = 'language/'.$lang.'/templates/message.phtml';
+	require($path);	
+
+} else {
+	require_once('language/ru/templates/message.phtml');
+}
+?>
+
+<?php if (!isset($_GET['dialog'])) {
+	$num_dialog = $this->get('num_dialog');
+	$row_dialog = $this->get('row_dialog');
+	?>
+	<!-- <p class="choise_dialog"><a class="<?php if($current == '/message'): ?>current<?php endif; ?>" href="<?php echo base_url .'message';?>"><?php echo $dialog_fate; ?></a> | <a><?php echo $dialog_employee; ?></a> </p> -->
+	<div class="right_block">
+		<div class="search_information">
+			<a>
+				<i class="fas fa-search"></i>	
+			</a>
+<!-- 		<a href="#">
+			<i class="fas fa-plus"></i>
+		</a> -->
+		<input type="search" placeholder="<?php echo $search_message; ?>">
+	</div>
+	<div id="message_dialog_users"> </div>
+	
+</div>
+<script>
+	load_message_users();
+	// setInterval(load_message_users,3000);
+</script>
+<?php }
+else {
+	if (isset($_GET['dialog'])) {
+		$num_dialog_header = $this->get('num_dialog_header');
+		$row_dialog_header = $this->get('row_dialog_header');
+		?>
+		<div class="right_block" id="right_block_message">
+			<div class="name_block nam_message">
+				<div class="avatar_block_message">
+					<div class="inf_block_left">
+						<div class="a_width">
+							<a href="<?php echo base_url .'message';?>"><i class="fas fa-angle-left"></i> <span><?php echo $back; ?></span> </a>
+						</div>	
+					</div>
+					<div class="inf_block_center">
+						<h3><?php echo $row_dialog_header['name_fate'].' '.$row_dialog_header['nickname_fate']; ?></h3>
+					</div>
+					<div class="inf_block_right">
+						<?php if (!empty($row_dialog_header['avatar_fate'])) {?>
+						<img src="<?php echo '../gallery/users/avatars/'.$row_dialog_header['avatar_fate']; ?>">
+						<?php } else { ?>
+						<img src="../img/noavatar.png">
+						<?php } ?>
+						<div class="inf_block_right_icon">
+							<nav>
+								<ul class="message_option">
+									<li><a><i class="hov_ic_mes fa fas fa-ellipsis-h"></i></a>
+										<ul class="message_option_li">
+											<li><a><i class=" fas fa-gift"></i><?php echo $gift_message; ?></a></li>
+											<hr style="margin: 5px 0;
+											background: #f1f1f1;	border: 1px solid #f1f1f1">
+											<li><a><i class="fas fa-user-slash"></i><?php echo $block_message; ?></a></li>
+											<li><a onclick="confirmation_dell_dialog_mess(this);" ><i class="far fa-trash-alt"></i><?php echo $delete_message_li; ?></a></li>
+
+										</ul>
+									</li>
+								</ul>	
+							</nav>
+
+							<form id="form" class="form_left" action="javascript:load_search_messes();open_search();">
+
+								<div id="r0">
+									<a href="javascript:change_visibility ('r0', 'r1')">
+										<i class="hov_ic_mes fa fas fa-search search_message_input"></i>
+									</a>
+								</div>
+								<div id="r1" style="display:none">
+									<nav>
+										<ul class="message_option">
+											<li>
+												<ul class="message_option_search">
+
+													<li>
+														<i class="fa fas fa-search search_message_input icon_in_input"></i>
+														<input class="input_search_message" type="search" id="search_mess" placeholder=" <?php echo $message_search; ?> " autocomplete="off" />
+
+														<div id="mc1">
+															<a href="javascript:change_visibility ('mc1', 'mc2')">
+																	<label class="message_calendar" ><i class="far fa-calendar-alt"></i></label>
+															</a>
+														</div>
+														<div id="mc2" style="display:none">
+															<input id="message_calendar" type='text' class="datepicker-here" data-position="left top" placeholder=" <?php echo $message_search_calendar; ?> " autocomplete="off" />
+
+															<a onClick="change_visibility ('mc2', 'mc1'); close_search();">
+																<label class="message_calendar" ><i class="far fa-times-circle close_calendar"></i></label>
+															</a>
+														</div>
+														<button class="search_message_button" id="button_search_mess"><?php echo $message_search_button; ?></button></li>
+
+													</ul>
+												</li>
+											</ul>	
+										</nav>
+
+
+										<a onClick="change_visibility ('r1', 'r0'); close_search();">
+											<i class="fas fa-times-circle close_search_message"></i>
+										</a>
+									</div>					
+								</form>
+								<div  class="overlay_del_message" id="confirmation_dell_dialog" style="display: none;">
+									<div class="delete_block_dialog">
+										<div class="delete_dialog_top">
+											<h3><?php echo $delete_dislog; ?></h3>
+										</div>
+										<p><?php echo $delete_dislog_2; ?> <span style="font-weight: bold;"><?php echo $delete_dislog_3; ?></span> <?php echo $delete_dislog_4; ?>
+											<br>
+											<br>
+											<?php echo $delete_dislog_5; ?> <span style="font-weight: bold;"><?php echo $delete_dislog_6; ?></span>.</p>
+											<div class="delete_dialog_bottom">
+												<button class="cancel_dell_dialog" onclick="cancel_dell_dialog_mess(this);"><?php echo $delete_dialog_button_no; ?></button>
+												<button class="dell_dialog" onclick="dell_dialog_mess(this);" data-deldialog="<?php echo $_GET['dialog']; ?>" data-urlmess="<?php echo base_url .'message';?>"><?php echo $delete_dialog_button_yes; ?></button>
+
+											</div>
+										</div>				
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>		
+					<div id="message_users">
+					</div>
+
+					<div id="search_message_users" style="display: none;"">
+					</div>
+					<script>
+						load_messes();
+					//setInterval(load_messes,3000);
+
+					
+				</script>
+				<div class="write_block_message">
+					<form id="form" action="javascript:send();">
+						<div class="write_block_message_left">
+							<a><i class="fas fa-camera"></i></a>	
+						</div>
+						<div class="write_block_message_center">
+							<div id="mess_to_send" class="write" contenteditable="true" aria-multiline="true" data-text="Написати повідомлення..." /></div>
+						</div>
+						<div class="write_block_message_right">
+							<button id="submit"><i class="fas fa-share-square"></i></button>
+							<nav>
+								<ul class="smile_option">
+									<li><a><i class="far fa-smile"></i></a>
+										<ul class="smile_option_ul">
+											<li>
+											<span>
+												<img class="smile" src="../img/smilies/smiley_PNG192.png" alt="B)">
+											</span>
+											<span>
+												<img class="smile" src="../img/smilies/smiley_PNG194.png" alt="😋">
+											</span>
+										</li>
+										</ul>
+									</li>
+								</ul>	
+							</nav>
+
+						</div>
+					</form>			
+				</div>
+			</div>
+
+			<?php }
+		} ?>

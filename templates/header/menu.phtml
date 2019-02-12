@@ -1,0 +1,45 @@
+<?php $current = $_SERVER['REQUEST_URI'];
+
+$db = $this->registry->get('db');
+$user_email_header = $_SESSION['login'];
+$query_user_header = "SELECT * FROM `registered_users` WHERE email='$user_email_header'";
+$result_user_header = mysqli_query($db, $query_user_header);
+$row_user_header = mysqli_fetch_array($result_user_header); 
+
+if (isset($row_user_header['language'])) {
+	$lang_header = $row_user_header['language'];
+	$path_header = 'language/'.$lang_header.'/templates/header.phtml';
+		require($path_header);	
+
+} else {
+	require_once('language/ru/templates/header.phtml');
+}
+?>
+<script type="text/javascript">
+  function load_number_mess()
+  {
+  	$.ajax({
+  		type: "POST",
+  		url:  "js_files/number_message.php",
+  		data: "req=ok",
+                success: function(html)
+                {
+          $("#number_mess").empty();
+          $("#number_mess").append(html);
+      }
+  });
+  }
+</script>
+<div class="menu">
+	<ul>
+		<li class="<?php if($current == '/'): ?>current<?php endif; ?>"><a class="<?php if($current == '/'): ?>current<?php endif; ?>" href="<?php echo base_url;?>"><i class="fas fa-home"></i></a></li>
+		<li class="<?php if($current == '/message' || $current == '/message?dialog='.$_GET['dialog']): ?>current<?php endif; ?>"><a class="<?php if($current == '/message' || $current == '/message?dialog='.$_GET['dialog']): ?>current<?php endif; ?>" href="<?php echo base_url.'message';?>"><i class="fas fa-envelope"></i><div id="number_mess"> </div></a></li>
+		<li><a class="<?php if($current == '/find_fate' || $current == '/search_users'): ?>current<?php endif; ?>" href="<?php echo base_url .'find_fate';?>"><?php echo $findfate; ?></a></li>
+		<li><a class="<?php if($current == '/find_employee'): ?>current<?php endif; ?>" href="<?php echo base_url .'find_employee';?>"><?php echo $findemployee; ?></a></li>
+		<li><a class="<?php if($current == '/find_friends'): ?>current<?php endif; ?>" href="<?php echo base_url .'find_friends';?>"><?php echo $findfriends; ?></a></li>
+	</ul>
+</div>
+<script>
+	load_number_mess();
+	setInterval(load_number_mess,1000);
+</script>

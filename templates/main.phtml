@@ -1,0 +1,39 @@
+<?php 
+$row_user = $this->get('row_user');
+if (isset($row_user['language'])) {
+	$lang = $row_user['language'];
+	$path = 'language/'.$lang.'/templates/main.phtml';
+	require($path);	
+
+} else {
+	require_once('language/ru/templates/main.phtml');
+}
+?>
+<div class="right_block">
+	<div class="search_information">
+		<div class="icon_right_input">
+			<form id="upload-image" enctype="multipart/form-data">
+				<input type="file" accept="image/x-png,image/gif,image/jpeg" title="Upload Image" name="image" id="image" class="upload"/>
+				<label for="image"><span><i class="fas fa-camera"></i></span></label>
+				<button id="add_news">
+					<i class="fas fa-share-square"></i>
+				</button>
+			</form>
+		</div>
+		<?php if (!empty($row_user['avatar_user'])) { ?>
+		<img src="<?php echo '../gallery/users/avatars/'.$row_user['avatar_user']; ?>">
+		<?php } else { ?>
+		<img src="../img/noavatar.png">
+		<?php } ?>
+		<div class="write" contenteditable="true" aria-multiline="true" data-text="Що у вас нового?" placeholder="<?php echo $what_new; ?>"/></div>
+	</div>
+          <div class="image-preview">
+            <img id="preview" src="" style="display: none;">
+          </div>
+          <div id="result"></div>
+	<div id="mynews"> </div>
+	<script>
+		mynews_users();		
+	</script>
+</div>
+

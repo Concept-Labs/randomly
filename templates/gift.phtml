@@ -1,0 +1,103 @@
+<?php 
+$current = $_SERVER['REQUEST_URI'];
+$row_user = $this->get('row_user');
+if (isset($row_user['language'])) {
+	$lang = $row_user['language'];
+	$path = 'language/'.$lang.'/templates/gift.phtml';
+	require($path);	
+
+} else {
+	require_once('language/ru/templates/gift.phtml');
+}
+$num_user_subscription = $this->get('num_user_subscription');
+$row_user_subscription = $this->get('row_user_subscription');
+?>
+
+<div class="gift_page right_block ">
+	<div class="people_post mar_top_no">
+		<div class="search_users_more" id="present_gift_open">
+			<h2><?php echo $my_gigt; ?>	<a onclick="open_gift_block()"><button class="present_gift"><?php echo $present_gigt; ?></button></h2>	</a>
+		</div>     
+		<div class="present_gift_overlay" id="present_gift_close" onclick="overlay_close_gift()" style="display:none">
+				
+		</div>
+		<div id="present_gift_friend_open" style="display:none">
+				<div class="present_gift_block">
+					<h3><?php echo $send_gift ?> <a class="close_gift" onclick="close_gift_block()"><i class="fas fa-times"></i></a></h3>
+
+
+					<a onclick="open_present_gift()"><div class="gift_block"><img src="../img/gift.png">
+						<div class="pay_gift">	
+							<span>100 <?php echo $ponty ?></span>
+						</div>
+					</div></a>
+					<a onclick="open_present_gift()"><div class="gift_block"><img src="../img/gift.png">
+						<div class="pay_gift">
+							<span>200 <?php echo $ponty ?></span>
+						</div>
+					</div></a>
+					<a onclick="open_present_gift()"><div class="gift_block"><img src="../img/gift.png">
+						<div class="pay_gift">
+							<span>300 <?php echo $ponty ?></span>
+						</div>
+					</div></a>
+					<a onclick="open_present_gift()"><div class="gift_ponty  "><?php echo $gift_ponty ?></div></a>
+					<a onclick="open_present_gift()"><div class="gift_bussines"><?php echo $gift_bussines ?></div></a>
+					<a onclick="open_present_gift()"><div class="gift_vip  "><?php echo $gift_vip ?></div></a>		
+				</div>
+			</div>
+		<div class="present_gift_friend" id="present_gift_friend_close" style="display:none">
+
+			<h3> <?php echo $receiver; ?> <a class="close_gift" onclick="close_gift_block()" ><i class="fas fa-times"></i></a></h3>
+			<div>
+				<?php if ($num_user_subscription != 0) {
+					foreach ($row_user_subscription as $value) {
+						if (isset($value[4]) && !empty($value[4])) {
+							$now_date = strtotime(date('Y-m-d'));
+							$now_year = date('Y');
+							$date_birth  = strtotime($value[4]);
+							$year_birth  = date_format(date_create($value[4]), 'Y');
+							$number_leap_year = 0;
+							for ($year = $year_birth; $year <= $now_year; $year++) {
+								if (($year%4 == 0) || ($year%400 == 0)) {
+									$number_leap_year += 1;
+								}
+							}
+							$day_user = floor(($now_date - $date_birth)/(60*60*24)-$number_leap_year);
+							$year_user = floor($day_user/365);
+						}
+						?>
+						<div class="gift_friend_block">					
+							<div class="ava_users">
+								<?php if (!empty($value['3'])) { ?>
+								<img src="<?php echo '../gallery/users/avatars/'.$value['3']; ?>">
+								<?php } else { ?>
+								<img src="../img/noavatar.png">
+								<?php } ?>
+							</div>
+							<div class="information_users">
+								<h4><?php echo $value[1].' '.$value[2]; ?></h4>
+								<br>
+								<span><?php echo $year_user; ?> year</span>
+							</div>								
+						</div>
+						<?php }
+					}
+					else { ?>
+					<div class="no_friend">
+						<i class="fas fa-user-friends"></i>
+						<span><?php echo $not_subscribe; ?></span>
+					</div>				
+					<?php } ?>
+				</div>
+
+
+			</div>
+			
+
+			<div class="gift_block"><img src="../img/gift.png"></div>
+			<div class="gift_block"><img src="../img/gift.png"></div>
+			<div class="gift_block"><img src="../img/gift.png"></div>
+		</div>
+
+	</div>

@@ -1,0 +1,106 @@
+.delete_page{
+	margin: 20px 0 10px 0;
+	text-align: center;
+	font-size: 95%;
+	font-style: normal;
+}
+.delete_page:hover{
+	text-align: right;
+}
+.delete_page span{
+	font-weight: bold;
+	position: absolute;
+	visibility: hidden;
+	margin-right: 20px;
+}
+.delete_page:hover span{
+	position: relative;
+	visibility: visible;
+}
+.delete_page a{
+	color: #470458a6;
+}
+.delete_page a:hover{
+	text-decoration: underline;
+}
+.choise_setting{
+	position: absolute;
+	font-size: 90%;
+	font-style: normal;
+	margin: 8px 0 0 410px;
+	background: #fff;
+	padding: 5px 10px;
+	border-radius: 10px;
+	color: #000;
+}
+.settings_page{
+	padding: 10px;
+	border-radius: 10px;
+	background: #fff;
+	float: right;
+	margin-top: 23px;
+	width: 66.5%;
+	height: auto;
+	overflow: hidden;
+}
+.settings_page input[type="submit"]:hover{
+	-webkit-box-shadow: 0px 0px 10px 0px rgba(50, 50, 50, 0.75);
+	-moz-box-shadow:    0px 0px 10px 0px rgba(50, 50, 50, 0.75);
+	box-shadow:         0px 0px 10px 0px rgba(50, 50, 50, 0.75);
+}
+.settings_page   input[type="submit"]:active{
+	background: linear-gradient(to bottom right, #da2ea3, #316cbf);	
+	-webkit-box-shadow: none;
+	-moz-box-shadow:    none;
+	box-shadow:         none;
+	-webkit-transform: scale(.99);
+	-moz-transform: scale(.99);
+	-ms-transform: scale(.99);
+	-o-transform: scale(.99);
+	transform: scale(.99);
+}
+
+.settings_block{
+	margin-top: 10px;
+	text-align: left;
+	width: 100%;
+	height: auto;
+	background: #f7f7f7;
+	padding: 10px;
+	border-radius: 10px;
+	box-sizing: border-box;
+}
+.top_setting{
+	margin-top: 0;
+}
+.settings_block .dropcontainer ul {
+	position: absolute;
+	border: 1px solid #ccc;
+	border-radius: 0 0 10px 10px;
+	border-top: none;
+	background: #fff;
+	list-style-type: none;
+	padding: 10px;
+	margin: 0;
+	width: 559.5px;
+	z-index: 100;
+	-webkit-box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	box-sizing: border-box;
+}
+.settings_block a{
+	font-size: 90%;
+}
+.privat_policy a:hover{
+	text-decoration: underline;
+}
+.setting_input_left{
+	width: 48%;
+	float: left;
+	box-sizing: border-box;
+}
+.setting_input_right{
+	width: 48%;
+	float: right;
+	box-sizing: border-box;
+}

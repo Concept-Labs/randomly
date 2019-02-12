@@ -1,0 +1,159 @@
+.error_fate{
+	text-align: center;
+	padding: 40px;
+	border-radius: 10px;
+	font-style: normal;
+	background: #f7f7f7;
+	width: 100%;
+	box-sizing: border-box;
+}
+.error_fate i{
+	width: 100%;
+	font-size: 300px;
+	color: #eaeaea;
+}
+.error_fate span{
+	height: auto;
+	width: 584px;
+	margin: -160px 0 0 -300px;
+	position: absolute;
+	padding: 5px;
+	background: #f7f7f7;
+}
+.error_fate a{
+	color: #470458a6;
+}
+.error_fate a:hover{
+	text-decoration: underline;
+}
+
+.your_fate_block{
+	margin: 23px 0 0 360px;
+	background: #fff;
+	float: left;
+	width: 255px;
+	min-width: 200px;
+	height: auto;
+	border-radius: 10px;
+	padding: 10px;
+}
+.your_fate_block .statistics_block{
+	padding: 10px;
+	text-align: center;
+	box-sizing: border-box;
+}
+.statistics_block_no{
+	margin-top: 10px;
+	border-radius: 10px;
+	background: #f7f7f7;
+	padding: 10px;
+	text-align: center;
+	box-sizing: border-box;
+}
+.your_fate_block button{
+	font: normal 90% 'century gothic', arial;
+	box-sizing: border-box;
+	right: 0;
+	left: 0;
+	margin:0 auto;
+	width: 100%;
+	padding: 1.6%;
+	border-radius: 10px;
+	background: linear-gradient(to bottom right, #EA33B0, #3E89F3);	
+	color: #fff;
+	letter-spacing: 1px;
+}
+.your_fate_block button:hover{
+	opacity: .7;
+}
+.your_fate_block button:active{
+	background: linear-gradient(to bottom right, #da2ea3, #316cbf);	
+}
+
+.fa_left{
+	margin-top: 1px;
+	float: left;
+}
+.fa_right{
+	margin-top: 1px;
+	float: right;
+}
+.exchange_alt, .your_fate_no{
+	opacity: 0;
+	position: absolute;
+	font-size: 100px;
+	margin: -250px 0 0 -245px;
+	color: none;
+	-webkit-transition: all .6s;
+	-o-transition: all .6s;
+	transition: all .6s;
+	visibility: hidden;
+}
+.your_fate_no{
+	margin: -300px 0 0 -230px;
+}
+.statistics_block:hover .exchange_alt{
+	opacity: 1;
+	visibility: visible;
+	color: #0B610B;
+	-webkit-transform: rotate(360deg) ;
+	-moz-transform: rotate(360deg) ;
+	-ms-transform: rotate(360deg) ;
+	-o-transform: rotate(360deg) ;
+	transform: rotate(360deg) ;
+}
+.statistics_block_no:hover .your_fate_no{
+	opacity: 1;
+	visibility: visible;
+	color: red;
+	-webkit-transform: rotate(-360deg) ;
+	-moz-transform: rotate(-360deg) ;
+	-ms-transform: rotate(-360deg) ;
+	-o-transform: rotate(-360deg) ;
+	transform: rotate(-360deg) ;
+}
+
+.fa-question{
+	visibility: visible;
+	opacity: 1;
+	color: #8c03a099;
+	position: absolute;
+	font-size: 90px;
+	margin: -270px 0 0 -225px;
+	-webkit-transition: all .6s;
+	-o-transition: all .6s;
+	transition: all .6s;
+}
+
+.change_block:hover .fa-question{
+	color: #0B610B;
+	-webkit-transform: rotate(360deg) ;
+	-moz-transform: rotate(360deg) ;
+	-ms-transform: rotate(360deg) ;
+	-o-transform: rotate(360deg) ;
+	transform: rotate(360deg) ;
+	visibility: hidden;
+	opacity: 0;
+}
+
+.search_users_more{
+	margin-top: 10px;
+	font-style: normal;
+}
+.search_users_more table{
+	font-size: 95%;
+	border: 1px solid #e3e3e3;
+	width: 95%;
+	box-sizing: border-box;
+	overflow: hidden;
+	left: 0;
+	right: 0;
+	margin: 20px auto;
+	border-collapse: collapse;
+}
+.search_users_more table td{
+	text-align: left;
+	width: 100%;
+	padding: 10px;
+	border: 1px solid #e3e3e3;
+}

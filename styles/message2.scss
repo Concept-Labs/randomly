@@ -1,0 +1,36 @@
+// обертка для строки ввода
+#input-box {
+  outline: none;
+  cursor: text;
+  position: relative;
+  overflow: hidden;
+  max-height: 1rem; // контент должен обрезаться по области видимого содержимого дочерней строки (1rem используется в качестве примера)
+
+  // строка ввода
+  #input-box-field {
+    position: absolute;
+    top: 0;
+    width: 100%;
+    white-space: nowrap;
+    overflow-x: scroll;
+    min-height: 2rem; // вертикальное расширение строки и визуальное скрытие горизонтального скроллбара (для этого высота должна быть больше высоты родительного элемента)
+    resize: none;
+
+    // отображение или скрытие элемента placeholder
+    &:not(:empty) ~ #input-box-placeholder { display: none; }
+
+    // скрытие лишних элементов внутри поля, которые могут в него попасть из-за особенностей браузеров
+    br, p, div { display: none; }
+
+  }
+
+  // placeholder
+  #input-box-placeholder {
+    position: absolute;
+    top: 0;
+    width: 100%;
+    pointer-events: none; // пользователь никак не должен взаимодействовать с этим элементом напрямую
+    &::before { content: attr(data-ph); } // вывод текста placeholder через атрибут data-p
+  }
+
+}

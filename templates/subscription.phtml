@@ -1,0 +1,191 @@
+<?php $current = $_SERVER['REQUEST_URI'];
+$row_user = $this->get('row_user');
+if (isset($row_user['language'])) {
+	$lang = $row_user['language'];
+	$path = 'language/'.$lang.'/templates/subscription.phtml';
+	require($path);	
+
+} else {
+	require_once('language/ru/templates/subscription.phtml');
+}
+$num_user_readers_subscription = $this->get('num_user_readers_subscription');
+$row_user_readers_subscription = $this->get('row_user_readers_subscription');
+$num_user_subscription = $this->get('num_user_subscription');
+$row_user_subscription = $this->get('row_user_subscription');
+?>
+
+<div class="right_block subscribe_block_no_top">
+	<p class="choise_dialog choise_subscribe"> 
+		<a href="<?php echo base_url .'subscription?friends';?>" class="<?php if($current == '/subscription?friends'): ?>current<?php endif; ?>"><?php echo $friend; ?><span class="notification_subscription"><?php $counter = 0;
+		foreach ($row_user_readers_subscription as $email_read) {
+			foreach ($row_user_subscription as $email_sub) {
+				if ($email_read[5] == $email_sub[5]) {
+					$counter += 1;
+				}
+			}
+		}
+		echo $counter; ?></span></a> |
+		<a href="<?php echo base_url .'subscription';?>" class="<?php if($current == '/subscription'): ?>current<?php endif; ?>"><?php echo $readers; ?><span class="notification_subscription"><?php echo $num_user_readers_subscription; ?></span></a> | <a href="<?php echo base_url .'subscription?my';?>" class="<?php if($current == '/subscription?my'): ?>current<?php endif; ?>"><?php echo $tracked; ?><span class="notification_subscription"><?php echo $num_user_subscription; ?></span></a>
+	</p>
+	<?php if (!isset($_GET['my']) && !isset($_GET['friends'])) { 
+		if ($num_user_readers_subscription != 0) {
+			foreach ($row_user_readers_subscription as $value) {
+				if (isset($value[4]) && !empty($value[4])) {
+					$now_date = strtotime(date('Y-m-d'));
+					$now_year = date('Y');
+					$date_birth  = strtotime($value[4]);
+					$year_birth  = date_format(date_create($value[4]), 'Y');
+					$number_leap_year = 0;
+					for ($year = $year_birth; $year <= $now_year; $year++) {
+						if (($year%4 == 0) || ($year%400 == 0)) {
+							$number_leap_year += 1;
+						}
+					}
+					$day_user = floor(($now_date - $date_birth)/(60*60*24)-$number_leap_year);
+					$year_user = floor($day_user/365);
+				}
+				?>
+				<div class="subscribe_people">
+					<div class="subscribe_people_ava">
+						<?php if (!empty($value['3'])) { ?>
+						<img src="<?php echo '../gallery/users/avatars/'.$value['3']; ?>">
+						<?php } else { ?>
+						<img src="../img/noavatar.png">
+						<?php } ?>
+					</div>
+					<div class="subscribe_people_name">
+						<h3><?php echo $value[1].' '.$value[2]; ?></h3>
+						<p><?php echo $year_user; ?> years</p>
+					</div>
+					<div class="subscribe_people_button">
+						<div id="locked_subscription_<?php echo $value[0] ?>"> </div>
+						<div id="readers_subscription_<?php echo $value[0] ?>"> </div>
+					</div>
+				</div>
+				<script>
+					var email_subscription="<?php echo $value[5]; ?>";
+					var id_subscription="<?php echo $value[0]; ?>";
+					readers_subscription_user(email_subscription, id_subscription);
+					locked_readers_subscription_user(email_subscription, id_subscription);
+				</script>
+				<?php }
+			}
+			else { ?>
+			<div class="error_subscription">
+				<i class="fas fa-book-reader"></i>
+				<span><?php echo $no_subscribe_your; ?></span>
+			</div>
+			<?php } 
+		} 
+		else {
+			if (isset($_GET['my'])) { 
+				if ($num_user_subscription != 0) {
+					$_SESSION['subscription'] = 'my';
+					foreach ($row_user_subscription as $value) {
+						if (isset($value[4]) && !empty($value[4])) {
+							$now_date = strtotime(date('Y-m-d'));
+							$now_year = date('Y');
+							$date_birth  = strtotime($value[4]);
+							$year_birth  = date_format(date_create($value[4]), 'Y');
+							$number_leap_year = 0;
+							for ($year = $year_birth; $year <= $now_year; $year++) {
+								if (($year%4 == 0) || ($year%400 == 0)) {
+									$number_leap_year += 1;
+								}
+							}
+							$day_user = floor(($now_date - $date_birth)/(60*60*24)-$number_leap_year);
+							$year_user = floor($day_user/365);
+						}?>			
+
+						<div class="subscribe_people">
+							<div class="subscribe_people_ava">
+								<?php if (!empty($value['3'])) { ?>
+								<img src="<?php echo '../gallery/users/avatars/'.$value['3']; ?>">
+								<?php } else { ?>
+								<img src="../img/noavatar.png">
+								<?php } ?>
+							</div>
+							<div class="subscribe_people_name">
+								<h3><?php echo $value[1].' '.$value[2]; ?></h3>
+								<p><?php echo $year_user; ?> years</p>
+							</div>
+							<div id="my_readers_subscription_<?php echo $value[0] ?>"> </div>
+							<script>
+								var email_my_subscription="<?php echo $value[5]; ?>";
+								var id_my_subscription="<?php echo $value[0]; ?>";
+								my_readers_subscription_user(email_my_subscription, id_my_subscription);
+							</script>
+						</div>
+						<?php }
+					}
+					else { ?>
+					<div class="error_subscription">
+						<i class="far fa-eye-slash"></i>
+						<span><?php echo $no_subscribe_you; ?></span>
+					</div>
+					<?php } 
+				}
+				if (isset($_GET['friends'])) {
+					if ($counter != 0) {
+						$_SESSION['subscription'] = 'friends';
+						foreach ($row_user_subscription as $email_sub) {
+							foreach ($row_user_readers_subscription as $email_read) {
+								if ($email_read[5] == $email_sub[5]) {
+									if (isset($email_read[4]) && !empty($email_read[4])) {
+										$now_date = strtotime(date('Y-m-d'));
+										$now_year = date('Y');
+										$date_birth  = strtotime($email_read[4]);
+										$year_birth  = date_format(date_create($email_read[4]), 'Y');
+										$number_leap_year = 0;
+										for ($year = $year_birth; $year <= $now_year; $year++) {
+											if (($year%4 == 0) || ($year%400 == 0)) {
+												$number_leap_year += 1;
+											}
+										}
+										$day_user = floor(($now_date - $date_birth)/(60*60*24)-$number_leap_year);
+										$year_user = floor($day_user/365);
+									} ?>
+									<div class="subscribe_people">
+										<div class="subscribe_people_ava">
+											<?php if (!empty($email_sub['3'])) { ?>
+											<img src="<?php echo '../gallery/users/avatars/'.$email_sub['3']; ?>">
+											<?php } else { ?>
+											<img src="../img/noavatar.png">
+											<?php } ?>
+										</div>
+										<div class="subscribe_people_name">
+											<h3><?php echo $email_sub[1].' '.$email_sub[2]; ?></h3>
+											<p><?php echo $year_user; ?> years</p>
+										</div>
+										<div class="subscribe_people_button">
+
+											<div id="my_readers_subscription_<?php echo $email_sub[0] ?>"> 
+											</div>
+											<div>
+												<form action="<?php echo base_url .'message?dialog';?>" method="post">
+													<input type="hidden" name="email_send" value="<?php echo $email_sub[5]; ?>">
+													<button class="message_friends" name="write"><i class="fas fa-envelope"></i></button>
+												</form>					
+											</div>
+										</div>
+										<script>
+											var email_my_subscription="<?php echo $email_sub[5]; ?>";
+											var id_my_subscription="<?php echo $email_sub[0]; ?>";
+											my_readers_subscription_user(email_my_subscription, id_my_subscription);
+										</script>
+									</div>
+									<?php }
+								}
+							}
+						}
+						else { ?>
+						<div class="error_subscription">
+							<i class="fas fa-user-friends"></i>
+							<span> <?php echo $not_friends; ?> </span>
+						</div>
+							
+	
+					 <?php	}
+					}
+				} ?>
+			</div>

@@ -1,0 +1,66 @@
+<!DOCTYPE html> 
+<html lang="ua">
+<head>
+	<title>{{$title}}</title>
+	<meta name="title" content="{{$title}}" />
+	<meta description="{{$description}}">
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+	<link rel="shortcut icon" href="/img/icon.png" type="image/x-icon">
+	{{$headfiles}}
+	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" crossorigin="anonymous">
+</head>
+<body>
+	{{$header}}
+	<div class="wrapper">	
+		<main>
+			<div class="content_resize">
+				{{$leftblock}}
+				{{$content}}
+				{{$rightblock}}
+			</div>
+		</main>
+	</div>
+	<!-- ОПОВЕЩЕНИЯ СООБЩЕНИЙ -->
+	<div class="notice">
+		<a href="#" class="notice_close">
+			<i class="fas fa-times"></i>
+		</a>
+		<a href="#">
+			<div class="notice_avatar">
+				<img src="../img/pol.jpg" alt="">
+			</div>
+			<div class="notice_message">
+				<h4>Дарья Love</h4>
+				<p>Привет!
+				</p>
+
+			</div>
+		</a>	
+	</div>
+	<!-- BACK -->
+	<div id="" class="back_block">
+		<div class="back">
+			<a onclick="javascript:history.back(); return false;"><p>Назад <i class="fas fa-angle-up"></i></p></a>			
+		</div>
+	</div>
+	<!-- BACK TO TOP -->
+	<div id="toTop" class="back_top_block">
+		<div class="back_top">
+			<p>Вгору <i class="fas fa-angle-up"></i></p>
+		</div>
+	</div>
+	{{$footer}}
+	<script type="text/javascript">
+		setTimeout(function(){$('.box, .notice').fadeOut('fast')},4000);  //30000 = 30 секунд
+
+		$(function() {
+			$(".contentPost").delay(0.1).fadeIn(100);
+		});
+	</script>
+	<script type="text/javascript" src="../script/lightbox-plus-jquery.min.js"></script>
+	<script type="text/javascript" src="../script/lightslider_script.js"></script>
+	<script type="text/javascript" src="../script/lightslider.js"></script>
+	<script type="text/javascript" src="../script/lightgallery.js"></script>
+	<script type="text/javascript" src="../script/countChar.js"></script>
+</body>
+</html>

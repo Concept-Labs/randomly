@@ -1,0 +1,88 @@
+<?php 
+$row_user = $this->get('row_user');
+if (isset($row_user['language'])) {
+	$lang = $row_user['language'];
+	$path = 'language/'.$lang.'/templates/page.phtml';
+	require($path);	
+
+} else {
+	require_once('language/ru/templates/page.phtml');
+}
+$row_user_page = $this->get('row_user_page');
+$num_user_gallery = $this->get('num_user_gallery');
+$row_user_gallery = $this->get('row_user_gallery');
+if (isset($row_user_page['date_birth']) && !empty($row_user_page['date_birth'])) {
+		$now_date = strtotime(date('Y-m-d'));
+		$now_year = date('Y');
+		$date_birth  = strtotime($row_user_page['date_birth']);
+		$year_birth  = date_format(date_create($row_user_page['date_birth']), 'Y');
+		$number_leap_year = 0;
+		for ($year = $year_birth; $year <= $now_year; $year++) {
+			if (($year%4 == 0) || ($year%400 == 0)) {
+				$number_leap_year += 1;
+			}
+		}
+		$day_user = floor(($now_date - $date_birth)/(60*60*24)-$number_leap_year);
+		$year_user = floor($day_user/365);
+	}
+?>
+<?php if (isset($_GET['id'])) { 
+	$_SESSION['id_user'] = $_GET['id']; ?>
+	<div class="user_page"></div>
+	<div class="right_user_block">
+		<ul id="lightSlider_fate">
+			<?php if (!empty($row_user_page['avatar_user'])) {
+				$avatar_user = $row_user_page['avatar_user']; ?>
+				<li class="contentPost" data-thumb="<?php echo '../gallery/users/avatars/'.$avatar_user; ?>" data-src="<?php echo '../gallery/users/avatars/'.$avatar_user; ?>">
+					<img  src="<?php echo '../gallery/users/avatars/'.$avatar_user; ?>" />
+				</li>
+				<?php } else { ?>
+				<li data-thumb="../img/noavatar.png" data-src="../img/noavatar.png">
+					<img src="../img/noavatar.png" />
+				</li>
+				<?php } ?>				
+				<?php if ($num_user_gallery != 0) {
+					foreach ($row_user_gallery as $gallery) { ?>
+					<li data-thumb="<?php echo '../gallery/users/'.$gallery[2]; ?>" data-src="<?php echo '../gallery/users/'.$gallery[2]; ?>">
+						<div class="contentPost">
+							<img src="<?php echo '../gallery/users/'.$gallery[2]; ?>" />
+						</div>
+
+					</li>
+
+					<?php }
+				} ?>
+			</ul>
+			<div class="name_block">
+				<nav>
+					<ul class="likes">
+						<li><a><i class="fas fa-heart"></i></a>
+							<ul class="likes_li">
+								<li><a  id="likes_update"></a></li>
+							</ul>
+						</li>
+					</ul>	
+				</nav>
+				<h2><?php echo $row_user_page['name']; ?><span class="icons_users_page"><a><i class="fas fa-gift"></i></a></span></h2>
+				<br>
+				<nav>
+					<ul class="likes">
+						<li><a><i class="fas fa-coins"></i></a>
+							<ul class="likes_li">
+								<li><a  id="likes_update"></a></li>
+							</ul>
+						</li>
+					</ul>	
+				</nav>
+				<h3><?php echo $row_user_page['nickname']; ?></h3>
+				<br>
+				<p><?php echo $year_user; ?> years</p>
+			</div>
+			<div class="name_block">
+				<button>Стежити</button>
+			</div>
+		</div>
+		<script type="text/javascript">
+			page_users();
+		</script>
+		<?php } ?>

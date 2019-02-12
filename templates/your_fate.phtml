@@ -1,0 +1,128 @@
+<?php 
+$db = $this->registry->get('db');
+$row_user = $this->get('row_user');
+if (isset($row_user['language'])) {
+	$lang = $row_user['language'];
+	$path = 'language/'.$lang.'/templates/your_fate.phtml';
+	require($path);	
+
+} else {
+	require_once('language/ru/templates/your_fate.phtml');
+}
+$row_user_attempt_fate = $this->get('row_user_attempt_fate');
+$row_your_fate = $this->get('row_your_fate');
+$num_user_gallery = $this->get('num_user_gallery');
+$row_your_gallery = $this->get('row_your_gallery');
+$now_date = date('Y-m-d');
+$year_user = $now_date - $row_your_fate['date_birth'];
+$table_your_fate = $this->get('table_your_fate');
+$relationships = $this->get('relationships');
+?>
+
+<?php if ($row_user_attempt_fate['attempt_user'] != 0) {?>
+<div class="your_fate_block">
+
+	<div class="avatar_block">
+		<?php if ($num_user_gallery != 0 || !empty($row_your_fate['avatar_user'])) { ?>
+		<ul id="lightSlider_fate">
+			<?php if (!empty($row_your_fate['avatar_user'])) {
+				$avatar_user = $row_your_fate['avatar_user']; ?>
+				<li data-thumb="<?php echo '../gallery/users/avatars/'.$avatar_user; ?>" data-src="<?php echo '../gallery/users/avatars/'.$avatar_user; ?>">
+					<img src="<?php echo '../gallery/users/avatars/'.$avatar_user; ?>" />
+				</li>
+				<?php } ?>				
+				<?php if ($num_user_gallery != 0) {
+					foreach ($row_your_gallery as $value) { ?>
+					<li class="contentPost" data-thumb="<?php echo '../gallery/users/'.$value['2']; ?>" data-src="<?php echo '../gallery/users/'.$value['2']; ?>">
+						<img src="<?php echo '../gallery/users/'.$value['2']; ?>" />
+					</li>
+
+					<?php }
+				} ?>
+			</ul>
+			<?php }
+			else { ?>
+			<img src="../img/noavatar.png" />
+			<?php } ?>
+
+		</div>
+		<div class="name_block">
+			<h2><?php echo $row_your_fate['name']; ?></h2>
+			<br>
+			<?php if (!empty($row_your_fate['nickname'])) {?>
+			<h3><?php echo $row_your_fate['nickname']; ?></h3>
+			<?php }
+			else { ?>
+			<h3><?php echo $nickname ?><br><?php echo $nickname_2 ?></h3>
+			<?php } ?>
+			<br>
+			<p class="left_block_age"><?php echo $year_user; ?> years</p>
+
+			<div class="search_users_more" id="h0">
+				<a onClick="document.getElementById('h0').style.display='none';document.getElementById('h1').style.display='';return false;"><span><?php echo $more_information_search; ?> <i class="fas fa-angle-down"></i></span></a>
+			</div>     
+			<div class="search_users_more" id="h1" style="display:none">
+				<table>
+					<tr>
+						<td><?php echo $sm; ?>: <?php echo $not_specified; ?></td>
+					</tr>
+					<tr>
+						<td><?php echo $kg; ?>: <?php echo $not_specified; ?></td>
+					</tr>
+					<tr>
+						<td><?php echo $color_eyes; ?>: <?php echo $not_specified; ?></td>
+					</tr>
+					<tr>
+						<td><?php echo $color_heir; ?>: <?php echo $not_specified; ?></td>
+					</tr>
+					
+				</table>
+				<table>
+					<tr>
+						<td><?php echo $hobby; ?>: <?php echo $not_specified; ?></td>
+					</tr>
+					<tr>
+						<td><?php echo $purpose_life; ?>: <?php echo $not_specified; ?></td>
+					</tr>
+					<tr>
+						<td><?php echo $religion; ?>: <?php echo $not_specified; ?></td>
+					</tr>
+				</table>
+
+				<a onClick="document.getElementById('h1').style.display='none';document.getElementById('h0').style.display='';return false;"><span><?php echo $more_information_search_close; ?> <i class="fas fa-angle-up"></i></span></a>
+			</div>
+
+		</div>
+		<div class="change_block">
+			<form action="<?php echo base_url .'your_fate?send_massage';?>" method="post">
+				<div class="statistics_block">
+					<div class="exchange_alt"><i class="fas fa-exchange-alt "></i></div>
+					<input type="hidden" name="table" value="<?php echo $table_your_fate; ?>">
+					<input type="hidden" name="relationships" value="<?php echo $relationships; ?>">
+					<button name="confirm"><i class="fa_left far fa-check-circle"></i> <?php echo $yes_fate; ?> <i class="fa_right far fa-check-circle"></i></button>
+				</div>
+			</form>
+			<i class="fas fa-question"></i>
+			<div class="statistics_block_no">
+				<div class="your_fate_no"><i class="fas fa-times"></i></div>
+				<button onclick="location.reload()"><i class="fa_left far fa-times-circle"></i> <?php echo $not_fate; ?> <i class="fa_right far fa-arrow-alt-circle-right"></i></button>
+			</div>				
+		</div>
+	</div>
+	<?php }
+	else { ?>
+	<div class="right_block">
+		<div class="error_fate">
+		<i class="fas fa-frown-open"></i>
+		<span>
+			<?php 	echo $error_fate; ?>
+			<br>
+			<?php echo $error_fate_2; ?> <a href="#"><?php echo $error_fate_3; ?></a>
+		</span>
+	</div>
+
+	</div>
+	
+	
+	
+	<?php } ?>

@@ -1,0 +1,77 @@
+<?php 
+$row_user = $this->get('row_user');
+$errors_image = $this->get('errors_image');
+if (isset($row_user['language'])) {
+	$lang = $row_user['language'];
+	$path = 'language/'.$lang.'/templates/photo_gallery.phtml';
+	require($path);	
+
+} else {
+	require_once('language/ru/templates/photo_gallery.phtml');
+}
+$num_user_image_bad = $this->get('num_user_image_bad');
+$row_user_gallery = $this->get('row_user_gallery');
+?>
+<?php if (!empty($errors_image)) {?>
+<div class="box">
+	<span><?php echo $errors_image; ?></span>
+</div>
+<?php } ?>
+<div class="right_block">
+	<div class="people_post ppmargin_gallery">
+		<h2><?php echo $myphoto; ?></h2>	
+		<form action="<?php echo base_url .'photo_gallery';?>" method="post" enctype="multipart/form-data">
+			<input type="file" name="upload" id="files" class="upload" data-multiple-caption="{count} файла загружено" multiple onchange="this.form.submit()"/>
+			<label for="files"><span><?php echo $photo_update; ?></span></label>
+		</form>
+		<div class="container">
+			<div id="gallery">
+				<?php if (!empty($row_user['avatar_user']) || $num_user_image_bad != 0) {?>
+				<?php if (!empty($row_user['avatar_user'])) { ?>
+					<figure class="photo photo_avatar">
+						<a href="<?php echo '../gallery/users/avatars/'.$row_user['avatar_user']; ?>" data-lightbox="roadtrip"><img src="<?php echo '../gallery/users/avatars/'.$row_user['avatar_user']; ?>"/></a>
+						<div class="photo_delete">
+							<a href="<?php echo base_url .'photo_gallery?delete_avatar#del';?>"><?php echo $photo_delete; ?></a>
+						</div>
+					</figure>
+				<?php } ?>
+				<?php foreach ($row_user_gallery as $value) {?>
+				<figure class="photo">
+					<a href="<?php echo '../gallery/users/'.$value['2']; ?>" data-lightbox="roadtrip"><img src="<?php echo '../gallery/users/'.$value['2']; ?>"/></a>
+					<div class="photo_delete">
+						<a href="<?php echo base_url .'photo_gallery?delete_photo&id='.$value['0'].'#del';?>"><?php echo $photo_delete; ?></a>
+					</div>
+				</figure>
+				<?php }
+			} 
+			else { ?>
+			<div class="not_photo">
+			<i class="fas fa-images"></i>
+			<span><?php echo $not_photo; ?></span>					
+			</div>
+
+			<?php } ?>
+		</div>
+		<?php if (isset($_GET['delete_photo']) || isset($_GET['delete_avatar'])): ?>
+			<?php if (isset($_GET['delete_photo'])) {
+				$delete = 'delete_photo&id='.$_SESSION['id'];
+			} elseif (isset($_GET['delete_avatar'])) {
+				$delete = 'delete_avatar';
+			} ?>
+			<div>
+				<a href="#x" class="overlay" id="del"></a>
+			<div class="popup">
+				<form action="<?php echo base_url .'photo_gallery?'.$delete;?>" method="post">
+					<?php echo $delete_photo; ?><br/><br/>
+					<button class="button_yes" type="submit" class="confirmation-btn" name="delete_user" value="1">Так</button>
+					<button class="button_no" type="submit" class="confirmation-btn" name="delete_user" value="0">Ні</button>
+				</form>
+				<a class="close" title="Закрыть" href="#close"></a>
+			</div>
+			</div>
+			
+		<?php endif ?>
+		
+	</div>
+</div>
+</div>

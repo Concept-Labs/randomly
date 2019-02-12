@@ -1,0 +1,132 @@
+<?php 
+$row_user = $this->get('row_user');
+$row_more_info_select = $this->get('row_more_info_select');
+if (isset($row_user['language'])) {
+	$lang = $row_user['language'];
+	$path = 'language/'.$lang.'/templates/settings.phtml';
+		require($path);	
+
+} else {
+	require_once('language/ru/templates/settings.phtml');
+}
+?>	
+	<div class="right_block">
+		<form action="<?php echo base_url .'settings';?>" method="post">
+			<div class="settings_block top_setting">				
+				<p><?php echo $change_data; ?></p>
+				<br>
+				<input type="text" name="name" placeholder="<?php echo $setting_name; ?>" value="<?php echo $row_user['name']; ?>" required>
+				<br>
+				<br>
+				<input type="text" name="nickname" placeholder="<?php echo $setting_nickname; ?>" value="<?php echo $row_user['nickname']; ?>">
+				<br>
+				<br>
+				<input type="date" name='date_birth' value="<?php echo $row_user['date_birth']; ?>"  required/>						
+				<br>
+				<br>	
+				<input type="text" name="city" placeholder="<?php echo $setting_city; ?>" value="<?php echo $row_user['city']; ?>" required>
+				<br>
+				<br>
+				<select name="orientation" required>
+					<option value=""><?php echo $change_orientation; ?></option>
+					<option value="heterosexual" <?=($row_user['orientation']=='heterosexual')?'selected':''?>><?php echo $heterosexual; ?></option>
+					<?php if ($row_user['sex'] == 0) {?>
+					<option value="lesbian" <?=($row_user['orientation']=='lesbian')?'selected':''?>><?php echo $lesbian; ?></option>	
+					<?php } elseif ($row_user['sex'] == 1) {?>
+					<option value="gay" <?=($row_user['orientation']=='gay')?'selected':''?>><?php echo $gay; ?></option>
+					<?php } ?>
+					<option value="beesexual" <?=($row_user['orientation']=='beesexual')?'selected':''?>><?php echo $bi; ?></option>
+				</select>
+				<br><br>
+				<select name="sex" required>
+					<option value=""><?php echo $change_floor; ?></option>
+					<option value="1" <?=($row_user['sex']=='1')?'selected':''?>><?php echo $floor_man; ?></option>
+					<option value="0" <?=($row_user['sex']=='0')?'selected':''?>><?php echo $floor_woman; ?></option>
+				</select>
+				<br>
+				<br>
+				<div class="search_users_more" id="h0">
+					<a onClick="document.getElementById('h0').style.display='none';document.getElementById('h1').style.display='';return false;"><span><?php echo $more_information; ?> <i class="fas fa-angle-down"></i></span></a>
+				</div>     
+				<div class="search_users_more" id="h1" style="display:none">
+
+				<p>Зовнішність:</p>
+					<select class="setting_input_left" name="sharp">
+						<option value=""><?php echo $your_height; ?></option>
+						<?php for ($i=50; $i < 251; $i++) { ?>
+						<option value="<?php echo $i; ?>" <?=($row_more_info_select['sharp']==$i)?'selected':''?>><?php echo $i; ?> см</option>
+						<?php } ?>
+					</select>
+					<select class="setting_input_left" name="weight">
+						<option value=""><?php echo $your_weight; ?></option>
+						<?php for ($i=20; $i < 201; $i++) { ?>
+						<option value="<?php echo $i; ?>" <?=($row_more_info_select['weight']==$i)?'selected':''?>><?php echo $i; ?> кг</option>
+						<?php } ?>
+					</select>
+					<select class="setting_input_left" name="eyes">
+						<option value=""><?php echo $eye_color; ?></option>
+						<option value="blue" <?=($row_more_info_select['eyes']=='blue')?'selected':''?>>синій</option>
+						<option value="sky_blue" <?=($row_more_info_select['eyes']=='sky_blue')?'selected':''?>>блакитний</option>
+						<option value="gray" <?=($row_more_info_select['eyes']=='gray')?'selected':''?>>сірий</option>
+						<option value="green" <?=($row_more_info_select['eyes']=='green')?'selected':''?>>зелений</option>
+						<option value="amber" <?=($row_more_info_select['eyes']=='amber')?'selected':''?>>бурштиновий</option>
+						<option value="fenny" <?=($row_more_info_select['eyes']=='fenny')?'selected':''?>>болотний</option>
+						<option value="curry" <?=($row_more_info_select['eyes']=='curry')?'selected':''?>>карий</option>
+						<option value="red" <?=($row_more_info_select['eyes']=='red')?'selected':''?>>червоний</option>
+						<option value="heterochromy" <?=($row_more_info_select['eyes']=='heterochromy')?'selected':''?>>гетерохромія</option>
+					</select>
+					<select class="setting_input_left" name="hair">
+						<option value=""><?php echo $color_hair; ?></option>
+						<option value="blond" <?=($row_more_info_select['hair']=='blond')?'selected':''?>>блондин</option>
+						<option value="chestnut" <?=($row_more_info_select['hair']=='chestnut')?'selected':''?>>русявий</option>
+						<option value="rufous" <?=($row_more_info_select['hair']=='rufous')?'selected':''?>>рудий</option>
+						<option value="brown" <?=($row_more_info_select['hair']=='brown')?'selected':''?>>шатен</option>
+						<option value="brunette" <?=($row_more_info_select['hair']=='brunette')?'selected':''?>>брюнет</option>
+						<option value="hoary" <?=($row_more_info_select['hair']=='hoary')?'selected':''?>>сивий</option>
+					</select>
+					<br>
+					<br>
+					<br>
+					<br>
+					<br>
+					<br>
+					<p>Інше:</p>
+					<input type="text" name="hobby" placeholder="<?php echo $your_hobby; ?>" value="<?php echo $row_more_info_select['hobby']; ?>">
+					<br>
+					
+					<input type="text" name="purpose_life" placeholder="<?php echo $purpose_life; ?>" value="<?php echo $row_more_info_select['purpose_life']; ?>">
+					<br>
+			
+					<input type="text" name="religion" placeholder="<?php echo $religion; ?>" value="<?php echo $row_more_info_select['religion']; ?>">
+					<br>
+					<br>
+					<a href="#" onClick="document.getElementById('h1').style.display='none';document.getElementById('h0').style.display='';return false;"><span><?php echo $more_information_close; ?> <i class="fas fa-angle-up"></i></span></a>
+				</div>
+			</div>		
+			<div class="settings_block">	
+				<p><?php echo $change_password; ?></p>
+				<br>	
+				<input type="text" placeholder="<?php echo $password_placegolder1; ?>">
+				<br><br>	
+				<input type="text" placeholder="<?php echo $password_placegolder2; ?>">
+			</div>
+			<div class="settings_block">
+				<p><?php echo $change_language; ?></p>
+				<br>
+				<select name="language">
+ 					  	<option value="en" <?=($row_user['language']=='en')?'selected':''?>>English</option>
+ 					  	<option value="ru" <?=($row_user['language']=='ru')?'selected':''?>>Русский</option>
+ 					  	<option value="ua" <?=($row_user['language']=='ua')?'selected':''?>>Українська</option>
+ 					  </select>  
+			</div>		
+			<div class="settings_block">	
+				<input type="submit" name="save_edit" value="<?php echo $save_change; ?>">
+			</div>
+		</form>	
+		<div class="settings_block privat_policy">
+			<a href="#"><?php echo $setting_privat_policy; ?></a>
+		</div>		
+		<div class="delete_page"><span><?php echo $not_delete_page; ?></span><?php echo $delete_page; ?> <a href="#"><?php echo $delete_page_2; ?> <i class="fas fa-user-minus"></i></a></div>
+	</div>
+
+

@@ -1,0 +1,155 @@
+.notification_subscription{
+	text-align: center;
+	opacity: 1;
+	padding: 2px 6px;
+	border-radius: 18px;
+	background: #A805C1;
+	background: linear-gradient(to bottom right, #e069f373, #a90cc1e0);
+	color: #fff;
+	margin: 0px 0px 0 2px;
+	font-size: 90%;
+}
+.error_subscription{
+	margin-top: 10px;
+	text-align: center;
+	padding: 40px;
+	border-radius: 10px;
+	font-style: normal;
+	background: #f7f7f7;
+	width: 100%;
+	box-sizing: border-box;
+}
+.error_subscription i{
+	width: 100%;
+	font-size: 300px;
+	color: #eaeaea;
+}
+.error_subscription span{
+	height: auto;
+	width: 584px;
+	margin: -151px 0 0 -300px;
+	position: absolute;
+	padding: 5px;
+	background: #f7f7f7;
+}
+.choise_dialog{
+	width: 100%;
+	text-align: center;
+	font-style: normal;
+	font-size: 90%;
+	margin: 6px 0 0 0px;
+	padding: 0px;
+	color: #000;
+}
+.choise_dialog a:hover, .choise_setting a:hover{
+	color: #A805C1;
+}
+.choise_dialog a.current, .choise_setting a.current{
+	color: #A805C1;
+}
+
+.subscribe_block_no_top{
+	padding: 0 10px 10px 10px;
+}
+.choise_subscribe{
+	font-size: 95%;
+}
+.choise_dialog a.current{
+	color: #A805C1;
+}
+.subscribe_people{
+	float: left;
+	width: 100%;
+	height: auto;
+	border-radius: 10px;
+	padding: 10px;
+	box-sizing: border-box;
+	background: #f7f7f7;
+	margin-top: 10px;
+}
+.subscribe_people_ava{
+	float: left;
+	width: 11%;
+	height: auto;
+}
+.subscribe_people_ava img{
+	width: 50px; 
+	height: 50px;
+	border-radius: 50%;
+	object-fit: cover;
+	display: block;
+	-webkit-transition: all .5s;
+	-o-transition: all .5s;
+	transition: all .5s;
+}
+.subscribe_people_ava img:hover{
+	-webkit-transform: scale(1.7);
+	-ms-transform: scale(1.7);
+	-o-transform: scale(1.7);
+	transform: scale(1.7);
+}
+.subscribe_people_name{
+	float: left;
+	width: 55%;
+	height: auto;
+}
+.subscribe_people_name p{
+	font-size: 90%;
+	margin-top: 5px;
+	color: #000;
+}
+.subscribe_people_button{
+	width: 34%;
+	height: auto;
+	float: left;
+}
+
+.subscribe_people button{
+	font-style: normal;
+	font-weight: bold;
+	float: right;
+	cursor: pointer;
+	color: #fff;
+	background: linear-gradient(to bottom right, #EA33B0, #3E89F3);
+	padding: 8px 28px;
+	font-size: 100%;
+	border: 0;
+	border-radius: 10px;
+	margin-top: 9px;
+}
+
+button.block_user{
+	margin-left: 15px;
+	background: linear-gradient(to bottom right, red, #000);
+}
+
+.subscribe_people button:hover{
+	opacity: .7;
+}
+button.block_user:active{
+	background: linear-gradient(to bottom right, #B40404, #000);	
+}
+
+button.subscription_minus{
+	background: 0; 
+	color: silver; 
+	border: 1px solid silver;
+	margin-top: 9px;
+}
+button.subscription_no_locked{
+	background: silver;
+	margin-left: 15px;
+}
+button.message_friends{
+    font-style: normal;
+    font-weight: bold;
+    float: right;
+    cursor: pointer;
+    color: #fff;
+    background: linear-gradient(to bottom right, #EA33B0, #3E89F3);
+    padding: 8px 10px;
+    font-size: 100%;
+    border: 0;
+    border-radius: 10px;
+    margin: 9px 9px 0 0;
+}

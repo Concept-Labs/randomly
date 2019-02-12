@@ -1,0 +1,68 @@
+.news_error{
+	float: left;
+	margin-top: 10px;
+	text-align: center;
+	padding: 40px;
+	border-radius: 10px;
+	font-style: normal;
+	background: #f7f7f7;
+	width: 100%;
+	box-sizing: border-box;
+}
+.news_error i{
+	width: 100%;
+	font-size: 300px;
+	color: #eaeaea;
+}
+.news_error span{
+	height: auto;
+	width: 584px;
+	margin: -203px 0 0 -300px;
+	position: absolute;
+	padding: 10px;
+	background: #f7f7f7;
+
+}
+.del_news{
+	float: right;
+}
+.del_news button{
+	border: 0;
+}
+.confirmation_del_news{
+	float: right;
+}
+.comment_block .confirmation_del_news{
+	position: absolute;
+	width: 32px;
+	right: 0;
+}
+
+.image-preview img{
+	width: 152px;
+	height: 152px;
+	display: block;
+	border-radius: 10px;
+	object-fit: cover;
+	margin: 10px 1px 1px 0px;
+	float: left;
+}
+.error_upload_news{
+	position: fixed;
+	width: fit-content;
+	padding: 20px 50px;
+	background: rgba(0, 0, 0, .45);
+	color: #fff;
+	font-style: normal;
+	border-radius: 10px;
+	border: 2px solid red;
+	right: 0;
+	left: 0;
+	margin: auto;
+	top: 50%;
+	transform: translate(0, -50%);
+	z-index: 1000;
+}
+#add_news i{
+	transform: scaleY(1) rotate(90deg);
+}

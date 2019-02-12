@@ -1,0 +1,109 @@
+.find_friends{
+	background: #f7f7f7;	
+	border-radius: 20px;
+	padding: 10px 145px 10px 10px;
+}
+.find_friends:hover, .find_friends:focus{
+	background: #fff;
+}
+button.find_friend{
+	border: 0;
+	font-size: 130%;
+	float: right;
+	margin: 3px 3px 0 0;
+	padding: 4px 6px;
+	border-radius: 50%;
+	color: #6f6f6f;
+	opacity: .5;
+}
+button.find_friend:hover{
+	background: #6f6f6f;
+	color: #fff;
+}
+.find_friends_page{
+	width: 100%;
+	height: auto;
+	overflow: hidden;
+}
+.find_friend_block{
+	float: left;
+	overflow: hidden;
+	height: auto;
+	width: 100%;
+	padding: 10px;
+	background: #f7f7f7;
+	border-radius: 10px;
+	margin-top: 10px;
+	box-sizing: border-box;
+}
+.ava_friend{
+	float: left;
+	width: 13%;
+	height: auto;
+}
+.ava_friend img{
+	width: 60px;
+	height: 60px;
+	display: block;
+	object-fit: cover;
+	border-radius: 50%;
+}
+.information_friend{
+	width: 57%;
+	float: left;
+	height: auto;
+	overflow: hidden;
+}
+.information_friend h3{
+	width: 100%;
+	height: auto;
+}
+.information_friend span{
+	font-size: 95%;
+	width: 100%;
+	float: left;
+	margin-top: 3px;
+}
+.add_friend{
+	width: 30%;
+	height: 100%;
+	float: left;
+}
+.add_friend button{
+	font-style: normal;
+	font-weight: bold;
+	float: right;
+	cursor: pointer;
+	color: #fff;
+	background: linear-gradient(to bottom right, #EA33B0, #3E89F3);
+	padding: 8px 28px;
+	font-size: 100%;
+	border: 0;
+	border-radius: 10px;
+	margin-top: 13px;
+}
+.add_friend button:hover{
+	opacity: .7;
+}
+
+#close_find_friends{
+	display: none;       
+	font-size: 100%;
+	font-style: normal;
+	font-weight: bold;
+	letter-spacing: 1px;
+	float: right;
+    padding: 0px 18px;
+    height: 35px;
+	background: #afafaf;
+	color: #fff;
+	opacity: 0.9;
+	border-radius: 20px;
+}
+#close_find_friends:hover{
+	opacity: .7;
+}
+.btn_find_friends{
+	float: right;
+	margin: -35px 0 0 0;
+}

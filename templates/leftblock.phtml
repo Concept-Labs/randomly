@@ -1,0 +1,220 @@
+<?php $current = $_SERVER['REQUEST_URI'];
+if ($_SERVER['REQUEST_URI'] != '/search_users') {
+	$db = $this->registry->get('db');
+	$user_email = $_SESSION['login'];
+	$query_user = "SELECT * FROM `registered_users` WHERE email='$user_email'";
+	$result_user = mysqli_query($db, $query_user);
+	$row_user = mysqli_fetch_array($result_user); 
+	if (isset($row_user['date_birth']) && !empty($row_user['date_birth'])) {
+		$now_date = strtotime(date('Y-m-d'));
+		$now_year = date('Y');
+		$date_birth  = strtotime($row_user['date_birth']);
+		$year_birth  = date_format(date_create($row_user['date_birth']), 'Y');
+		$number_leap_year = 0;
+		for ($year = $year_birth; $year <= $now_year; $year++) {
+			if (($year%4 == 0) || ($year%400 == 0)) {
+				$number_leap_year += 1;
+			}
+		}
+		$day_user = floor(($now_date - $date_birth)/(60*60*24)-$number_leap_year);
+		$year_user = floor($day_user/365);
+	}
+	
+
+	$email_user = $row_user['email'];
+	$query_user_gallery = "SELECT * FROM `gallery_users` WHERE email_user_gallery='$email_user'";
+	$result_user_gallery = mysqli_query($db, $query_user_gallery);
+	$num_user_gallery = mysqli_num_rows($result_user_gallery);
+	if (isset($row_user['language'])) {
+		$lang = $row_user['language'];
+		$path = 'language/'.$lang.'/templates/leftblock.phtml';
+		require($path);	
+
+	} else {
+		require_once('language/ru/templates/leftblock.phtml');
+	}
+	$redirect = 'http://' . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];
+
+	$query_user_attempt_fate = "SELECT * FROM `attempt_fate` WHERE email_user='$email_user'";
+	$result_user_attempt_fate = mysqli_query($db, $query_user_attempt_fate);
+	$num_user_attempt_fate = mysqli_num_rows($result_user_attempt_fate);
+	$row_user_attempt_fate = mysqli_fetch_array($result_user_attempt_fate);
+	if ($num_user_attempt_fate == 0) {
+		$query_attempt_fate = "INSERT INTO `attempt_fate`(`id`, `email_user`, `attempt_user`, `date_attempt`) VALUES (null,'$email_user','3',NOW())";
+		mysqli_query($db, $query_attempt_fate);
+	}
+	if ($row_user_attempt_fate['date_attempt'] != $now_date) {
+		mysqli_query($db, "UPDATE `attempt_fate` SET `attempt_user`='3',`date_attempt`='$now_date' WHERE email_user='$email_user'");
+	} 
+	
+//--код знакомств--
+	$query_user_become_acquainted = "SELECT * FROM `become_acquainted` WHERE email_user_recipient='$email_user'";
+	$result_user_become_acquainted = mysqli_query($db, $query_user_become_acquainted);
+	$num_user_become_acquainted = mysqli_num_rows($result_user_become_acquainted);
+	$row_user_become_acquainted = mysqli_fetch_all($result_user_become_acquainted);
+	if ($num_user_become_acquainted != 0) {
+		foreach ($row_user_become_acquainted as $value) {
+			$date_now = strtotime($now_date);
+			$date_relationships = strtotime($value[3]);
+			$passed_days = floor(($date_now - $date_relationships)/(60*60*24));
+			if ($passed_days > 7) {
+				$query_user_become_acquainted_del = "DELETE FROM `become_acquainted` WHERE email_user_recipient='$email_user' AND date='$value[3]'";
+				mysqli_query($db, $query_user_become_acquainted_del);
+			}
+		}
+	}
+
+	$query_user_stroll = "SELECT * FROM `stroll` WHERE email_user_recipient='$email_user'";
+	$result_user_stroll = mysqli_query($db, $query_user_stroll);
+	$num_user_stroll = mysqli_num_rows($result_user_stroll);
+	$row_user_stroll = mysqli_fetch_all($result_user_stroll);
+	if ($num_user_stroll != 0) {
+		foreach ($row_user_stroll as $value) {
+			$date_now = strtotime($now_date);
+			$date_relationships = strtotime($value[3]);
+			$passed_days = floor(($date_now - $date_relationships)/(60*60*24));
+			if ($passed_days > 7) {
+				$query_user_stroll_del = "DELETE FROM `stroll` WHERE email_user_recipient='$email_user' AND date='$value[3]'";
+				mysqli_query($db, $query_user_stroll_del);
+			}
+		}
+	}
+
+	$query_user_sleep = "SELECT * FROM `sleep` WHERE email_user_recipient='$email_user'";
+	$result_user_sleep = mysqli_query($db, $query_user_sleep);
+	$num_user_sleep = mysqli_num_rows($result_user_sleep);
+	$row_user_sleep = mysqli_fetch_all($result_user_sleep);
+	if ($num_user_sleep != 0) {
+		foreach ($row_user_sleep as $value) {
+			$date_now = strtotime($now_date);
+			$date_relationships = strtotime($value[3]);
+			$passed_days = floor(($date_now - $date_relationships)/(60*60*24));
+			if ($passed_days > 7) {
+				$query_user_sleep_del = "DELETE FROM `sleep` WHERE email_user_recipient='$email_user' AND date='$value[3]'";
+				mysqli_query($db, $query_user_sleep_del);
+			}
+		}
+	}
+	?>
+	<div class="left_sidebar">
+		<ul class="menu_left_icon">
+			<li><a href="<?php echo base_url .'news';?>" class="<?php if($current == '/news'): ?>current<?php endif; ?> tooltip_setting tooltip tooltip-right" data-tooltip=' <?php echo $tooltip_news ?>'>
+				<i class="fas fa-tape"></i>
+			</a>
+		</li>
+		<li>
+			<a href="<?php echo base_url .'subscription?friends';?>" class="<?php if($current == '/subscription?friends'): ?>current<?php endif; ?> tooltip_setting tooltip tooltip-right" data-tooltip=' <?php echo $tooltip_subscribe ?>'>
+				<i class="fas fa-user-friends"></i>
+			</a>
+		</li>
+		<li>
+			<a href="<?php echo base_url .'photo_gallery';?>" class="<?php if($current == '/photo_gallery'): ?>current<?php endif; ?> tooltip_setting tooltip tooltip-right" data-tooltip=' <?php echo $tooltip_gallery ?>' ><i class="fas fa-images"></i></a>
+		</li>
+		<li>
+			<a href="<?php echo base_url .'gift';?>" class="<?php if($current == '/gift'): ?>current<?php endif; ?> tooltip_setting tooltip tooltip-right" data-tooltip=' <?php echo $tooltip_gift ?>'><i class="fas fa-gift"></i></a>
+		</li>
+		<li>
+			<a href="<?php echo base_url .'settings';?>" class="<?php if($current == '/settings'): ?>current<?php endif; ?> tooltip_setting tooltip tooltip-right" data-tooltip=' <?php echo $tooltip_setting ?>'><i class="fas fa-user-edit"></i></a>
+		</li>
+		<li>
+			<a href="<?php echo base_url .'information';?>" class="<?php if($current == '/information'): ?>current<?php endif; ?> tooltip_setting tooltip tooltip-right" data-tooltip=' <?php echo $tooltip_information ?>'><i class="fas fa-exclamation-circle"></i></a>
+		</li>
+	</ul>
+
+	<div class="avatar_block">
+		<form action="<?php echo base_url .'index';?>" method="post" enctype="multipart/form-data">
+			<div class="change_avatar">
+				<input type="file" name="image_avatar" id="file" class="upload" multiple onchange="this.form.submit()"/>
+				<input type="hidden" name="redirect" value="<?php echo $redirect;?>">
+				<label for="file"><span><?php echo $avatar_change; ?></span></label>
+			</div>
+		</form>	
+		<?php if ($num_user_gallery != 0 || !empty($row_user['avatar_user'])) { ?>
+		<ul id="lightSlider">
+			<?php if (!empty($row_user['avatar_user'])) {
+				$avatar_user = $row_user['avatar_user']; ?>
+				<li data-thumb="<?php echo '../gallery/users/avatars/'.$avatar_user; ?>" data-src="<?php echo '../gallery/users/avatars/'.$avatar_user; ?>">
+					<img src="<?php echo '../gallery/users/avatars/'.$avatar_user; ?>" />
+				</li>
+				<?php } else { ?>
+				<li data-thumb="../img/noavatar.png" data-src="../img/noavatar.png">
+					<img src="../img/noavatar.png" />
+				</li>
+				<?php } ?>				
+				<?php if ($num_user_gallery != 0) {
+					while ($row_user_gallery = mysqli_fetch_array($result_user_gallery)) { ?>
+					<li data-thumb="<?php echo '../gallery/users/'.$row_user_gallery['path_image']; ?>" data-src="<?php echo '../gallery/users/'.$row_user_gallery['path_image']; ?>">
+						<div class="contentPost">
+							<img src="<?php echo '../gallery/users/'.$row_user_gallery['path_image']; ?>" />
+						</div>
+
+					</li>
+
+					<?php }
+				} ?>
+			</ul>
+			<?php }
+			else { ?>
+			<img src="../img/noavatar.png" />
+			<?php } ?>
+
+		</div>
+		<div class="name_block">
+			<nav>
+				<ul class="likes">
+					<li><a><i class="fas fa-heart"></i></a>
+						<ul class="likes_li">
+							<li><a  id="likes_update"></a></li>
+						</ul>
+					</li>
+				</ul>	
+			</nav>
+			<h2><?php echo $row_user['name']; ?></h2>
+			<br>
+			<?php if (!empty($row_user['nickname'])) {?>
+			<h3><?php echo $row_user['nickname']; ?></h3>
+			<?php }
+			else { ?>
+			<h3 class="nickname"><a href="<?php echo base_url .'settings';?>"><?php echo $nickname ?></h3>
+				<?php } ?>
+				<br>
+				<p class="left_block_age"><?php echo $year_user; ?> years</p>
+
+			</div>
+			<div class="statistics_block">
+				<div class="search_users_more" id="choing_fate_open">
+					<a onClick="change_visibility ('choing_fate_open', 'choing_fate_close')"><span><p><?php echo $choice_fate ?> <i class="fas fa-angle-down"></i></p> </span><div class="notification_fate">
+						<span id="number_all_offers"></span>
+					</div></a>
+				</div>     
+				<div class="search_users_more" id="choing_fate_close" style="display:none">
+					<span>
+						<p><?php echo $try.' '.$row_user_attempt_fate['attempt_user']; ?></p>
+					</span>
+					<br>
+					<div><a <?php if ($num_user_become_acquainted != 0) echo 'href="'.base_url .'your_fate?become_acquainted"'; ?>><h4><?php echo $acquainted ?> </h4><h4 class="center_content" id="number_become_acquainted"></h4></a>
+					</div>
+					<div><a <?php if ($num_user_stroll != 0) echo 'href="'.base_url .'your_fate?stroll"'; ?>><h4><?php echo $walk ?> </h4><h4 class="center_content" id="number_stroll"></h4></a>
+					</div>		
+					<div><a <?php if ($num_user_sleep != 0) echo 'href="'.base_url .'your_fate?sleep"'; ?>><h4><?php echo $sleepen ?> </h4><h4 class="center_content" id="number_sleep"></h4></a>
+					</div>
+					<br>
+
+					<a onClick="change_visibility ('choing_fate_close', 'choing_fate_open'); close_search();"><span><p>приховати список <i class="fas fa-angle-up"></i></p></span></a>
+				</div>
+			</div>
+			<script>
+				like_user();
+				setInterval(like_user,3000);
+				number_become_acquainted();
+				setInterval(number_become_acquainted,3000);
+				number_stroll();
+				setInterval(number_stroll,3000);
+				number_sleep();
+				setInterval(number_sleep,3000);
+				number_all_offers();
+				setInterval(number_all_offers,3000);
+			</script>
+		</div>
+		<?php } ?>
+

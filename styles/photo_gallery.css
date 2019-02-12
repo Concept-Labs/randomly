@@ -1,0 +1,383 @@
+.not_photo{
+	text-align: center;
+}
+.not_photo span{
+	font-style: normal;
+	height: auto;
+	width: 584px;
+	margin: -174px 0 0 -300px;
+	position: absolute;
+	padding: 10px;
+	background: #f7f7f7;
+}
+.not_photo i{
+	width: 100%;
+	font-size: 300px;
+	color: #eaeaea;
+}
+
+.ppmargin_gallery{
+	padding: 15px;
+	margin-top: 0;
+}
+.ppmargin_gallery h2{
+	font-style: normal;
+	font-weight: 100;
+	margin-bottom: 10px;
+}
+.gallery_img_block{
+	float: left;
+	margin: 6px;
+	width: 104px;
+	height: 104px;
+}
+.gallery_img_block img{
+	border-radius: 10px;
+	width: 100%;
+	height: 100%;
+	object-fit: cover;
+	display: block;
+}
+.photo:hover .photo_delete{
+	display: block;
+}
+
+.photo_delete{
+	display: none;
+	position: absolute;
+	width: 280px;
+	text-align: center;
+	height: 30px;
+	margin: -30px 0 0 0;
+	background: #0000006b;
+}
+
+.photo_delete:hover a{
+	opacity: 1;
+}
+.photo_delete a{
+	opacity: .8;
+	display: block;
+	width: 100%;
+	height: 100%;
+	line-height: 30px;
+	color: #fff;
+	font-style: normal;
+}
+.upload {
+	width: 0.1px;
+	height: 0.1px;
+	opacity: 0;
+	overflow: hidden;
+	position: absolute;
+	z-index: -1;
+}
+label[for="files"] {
+	text-align: center;
+	box-sizing: border-box;
+	font-weight: bold;
+	display: inline-block;
+	cursor: pointer;
+	width: fit-content;
+	font-size: 95%;
+	font-style: normal;
+	padding: 4px 15px;
+	background: linear-gradient(to bottom right, #EA33B0, #3E89F3);
+	color: #ffffff;
+	border-radius: 10px;
+	float: right;
+	margin: -34px 6px 0 0;
+}
+label[for="files"]:hover{
+	opacity: .7;
+}
+label[for="files"]:active{
+	background: linear-gradient(to bottom right, #da2ea3, #316cbf);	
+	-webkit-transform: scale(.99);
+	-moz-transform: scale(.99);
+	-ms-transform: scale(.99);
+	-o-transform: scale(.99);
+	transform: scale(.99);
+}
+
+
+.container_galery {
+	width: 100%;
+	max-width: 990px;
+	color: #6E6E6E;
+	margin: 0 auto;
+	font: normal 110% 'century gothic', arial;
+}
+p.galery_p {
+	text-align: center;
+	font-size: 120%;
+}
+
+.photo {
+	float: left;
+	width: 290px;
+	height: 208px;
+	padding: 5px;
+	box-sizing: border-box;
+}
+
+
+/*КЛАССЫ ФОТОГРАФИЙ В НОВОСТЯХ*/
+.photo_avatar {
+	width: 290px;
+	height: 415px;
+}
+.photo_news_1 {
+	padding: 0;
+	width: 100%;
+	height: 415px;
+}
+.photo_news_2 {
+	width: 50%;
+	height: 408px;
+}
+.photo_news_4 {
+	width: 285px;
+	height: 208px;
+}
+.photo_news_3_6_9 {
+	width: 190px;
+	height: 190px;
+}
+.photo_news_5 {
+	width: 190px;
+	height: 190px;
+}
+.photo_news_7 {
+	width: 25%;
+	height: 125px;
+}
+.photo_news_8 {
+	width: 25%;
+	height: 125px;
+}
+.photo_news_10 {
+	width: 20%;
+	height: 100px;
+}
+.photo img {
+	display: block;
+	width: 100%;
+	height: 100%;
+	object-fit: cover;
+}
+.photo a {
+	position: relative;
+}
+/* .photo a:after {
+ 	content: '';
+ 	background: url(../img/eye-icon.png) no-repeat center;
+ 	width: 52px;
+ 	height: 35px;
+ 	position: absolute;
+ 	margin: auto;
+ 	top: 0;
+ 	left: 0;
+ 	bottom: 0px;
+ 	right: 0;
+ 	visibility: hidden;
+ 	}*/
+ 	.photo:hover> a:after {
+ 		visibility: visible;
+ 	}
+ 	.photo figcaption {
+ 		color: #999999;
+ 		text-align: center;
+ 		margin-top: 20px;
+ 	}
+ 	#gallery:after { 
+ 		content: '';
+ 		display: block; 
+ 		height: 0; 
+ 		clear: both;
+ 	}
+
+
+ 	/*МОДАЛЬНОЕ ОКНО УДАЛЕНИЯ*/
+ 	/* Базовые стили слоя затемнения и модального окна  */
+ 	.overlay {
+ 		top: 0;
+ 		right: 0;
+ 		bottom: 0;
+ 		left: 0;
+ 		z-index: 1000;
+ 		display: none;
+ 		/* фон затемнения */
+
+ 		position: fixed; /* фиксированное поцизионирование */
+ 		cursor: default; /* тип курсара */
+ 	}
+ 	/* активируем слой затемнения */
+ 	.overlay:target {
+ 		display: block;
+ 	}
+ 	/* стили модального окна */
+ 	.popup {
+ 		color: #fff;
+ 		font-style: normal;
+ 		text-align: center;
+ 		top: -100%;
+ 		right: 0;
+ 		left: 50%;
+ 		font-size: 14px;
+ 		z-index: 1001;
+ 		margin: 0;
+ 		width: 85%;
+ 		min-width: 320px;
+ 		max-width: 600px;
+ 		/* фиксированное позиционирование, окно стабильно при прокрутке */
+ 		position: fixed;
+ 		padding: 15px;
+ 		background-color: #000000cf;
+ 		/* скругление углов */
+ 		-webkit-border-radius: 10px;
+ 		-moz-border-radius: 10px;
+ 		-ms-border-radius: 10px;
+ 		border-radius: 10px;
+ 		/* внешняя тень */
+ 		-webkit-box-shadow: 0 15px 20px rgba(0,0,0,.22),0 19px 60px rgba(0,0,0,.3);
+ 		-moz-box-shadow: 0 15px 20px rgba(0,0,0,.22),0 19px 60px rgba(0,0,0,.3);
+ 		-ms-box-shadow: 0 15px 20px rgba(0,0,0,.22),0 19px 60px rgba(0,0,0,.3);
+ 		box-shadow: 0 15px 20px rgba(0,0,0,.22),0 19px 60px rgba(0,0,0,.3);
+ 		-webkit-transform: translate(-50%, -500%);
+ 		-ms-transform: translate(-50%, -500%);
+ 		-o-transform: translate(-50%, -500%);
+ 		transform: translate(-50%, -500%);
+ 		-webkit-transition: -webkit-transform 0.4s ease-out;
+ 		-moz-transition: -moz-transform 0.4s ease-out;
+ 		-o-transition: -o-transform 0.4s ease-out;
+ 		transition: transform 0.4s ease-out;
+ 	}
+ 	/* активируем модальный блок */
+ 	.overlay:target+.popup {
+ 		-webkit-transform: translate(-50%, 0);
+ 		-ms-transform: translate(-50%, 0);
+ 		-o-transform: translate(-50%, 0);
+ 		transform: translate(-50%, 0);
+ 		top: 30%;
+ 	}
+ 	/* формируем кнопку закрытия */
+ 	.close {
+ 		top: 0px;
+ 		right: 0px;
+ 		width: 20px;
+ 		height: 20px;
+ 		position: absolute;
+ 		padding: 0;
+ 		-webkit-border-radius: 15px;
+ 		-moz-border-radius: 15px;
+ 		-ms-border-radius: 15px;
+ 		-o-border-radius: 15px;
+ 		border-radius: 15px;
+ 		-moz-box-shadow: 0px 0px 10px #fff;
+ 		text-align: center;
+ 		text-decoration: none;
+ 		font: 13px/20px 'Tahoma', Arial, sans-serif;
+ 		font-weight: bold;
+ 		-webkit-transition: all ease .4s;
+ 		-moz-transition: all ease .4s;
+ 		-ms-transition: all ease .4s;
+ 		-o-transition: all ease .4s;
+ 		transition: all ease .4s;
+ 		opacity: .4;
+ 	}
+ 	.close:before {
+
+ 		color: #fff;
+ 		content: "X";
+ 		text-shadow: 0 -1px #fff;
+ 		font-size: 12px;
+ 	}
+ 	.close:hover {
+ 		opacity: 1;
+ 	}
+ 	/* изображения внутри окна */
+ 	.popup img {
+ 		width: 100%;
+ 		height: auto;
+ 	}
+ 	/* миниатюры слева/справа */
+ 	.pic-left, 
+ 	.pic-right {
+ 		width: 25%;
+ 		height: auto;
+ 	}
+ 	.pic-left {
+ 		float: left;
+ 		margin: 5px 15px 5px 0;
+ 	}
+ 	.pic-right {
+ 		float: right;
+ 		margin: 5px 0 5px 15px;
+ 	}
+ 	/* элементы м-медиа, фреймы */
+ 	.popup embed, 
+ 	.popup iframe {
+ 		top: 0;
+ 		right: 0;
+ 		bottom: 0; 
+ 		left: 0; 
+ 		display:block;
+ 		margin: auto;
+ 		min-width: 320px;
+ 		max-width: 600px;
+ 		width: 100%;
+ 	}
+ 	.popup h2 { /* заголовок 2 */
+ 		margin: 0;
+ 		color: #008000;
+ 		padding: 5px 0px 10px;
+ 		text-align: left;
+ 		text-shadow: 1px 1px 3px #adadad;
+ 		font-weight: 500;
+ 		font-size: 1.4em;
+ 		line-height: 1.3;
+ 	}
+ 	/* параграфы */
+ 	.popup p {margin: 0; padding: 5px 0}
+
+ 	.popup button{
+ 		font-style: normal;
+ 		padding: 5px 10px;
+ 		text-align: center;
+ 		border: 0;
+ 		background: none;
+ 		color: #fff;
+ 		border-radius: 5px;
+ 		cursor: pointer;
+ 		-webkit-transition: all .3s;
+ 		-o-transition: all .3s;
+ 		transition: all .3s;
+ 	}
+ 	.popup .button_yes{
+ 		background: #01A103;
+ 	}
+ 	.popup .button_no{
+ 		margin-left: 5px;
+ 		background: #E60307 ;
+ 	}
+ 	.popup button:hover{
+ 		-webkit-transform: rotate(-7deg);
+ 		-moz-transform: rotate(-7deg);
+ 		-ms-transform: rotate(-7deg);
+ 		-o-transform: rotate(-7deg);
+ 		transform: rotate(-7deg);
+ 	}
+ 	.popup button:active{
+ 		-webkit-transform: scale(.97);
+ 		-moz-transform: scale(.97);
+ 		-ms-transform: scale(.97);
+ 		-o-transform: scale(.97);
+ 		transform: scale(.97);
+ 	}
+ 	.popup .button_yes:active{
+ 		background: #038c05;
+ 	}
+ 	.popup .button_no:active{
+ 		background: #a50003;
+ 	}
