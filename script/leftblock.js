@@ -14,11 +14,25 @@ function like_user()
                 success: function(html)
                 {
           //Очищаем форму ввода
-          $("#likes_update").empty();
+          $("#my_likes").empty();
           //Выводим что вернул нам php
-          $("#likes_update").append(html);
+          $("#my_likes").append(html);
       }
   });
+  }
+
+  function send_my_like(btn_like)
+  {
+    var like_recipient = $(btn_like).data('email');
+    $.ajax({
+      type: "POST",
+      url: "js_files/like_users_insert.php",
+      data:"like_recipient="+like_recipient,
+      success: function(html)
+      {
+        like_user();
+      }
+    });
   }
 
   function number_become_acquainted()

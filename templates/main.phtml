@@ -9,8 +9,6 @@ if (isset($row_user['language'])) {
 	require_once('language/ru/templates/main.phtml');
 }
 ?>
-
-
 <div class="right_block">
 	<div class="search_information">
 		<div class="icon_right_input">
@@ -29,10 +27,10 @@ if (isset($row_user['language'])) {
 		<?php } ?>
 		<div class="write" contenteditable="true" aria-multiline="true" data-text="Що у вас нового?" placeholder="<?php echo $what_new; ?>"/></div>
 	</div>
-	<div class="image-preview">
-		<img id="preview" src="" style="display: none;">
-	</div>
-	<div id="result"></div>
+          <div class="image-preview">
+            <img id="preview" src="" style="display: none;">
+          </div>
+          <div id="result"></div>
 	<div id="mynews"> </div>
 	<script>
 		mynews_users();		

@@ -54,14 +54,8 @@ if (isset($row_user_page['date_birth']) && !empty($row_user_page['date_birth']))
 				} ?>
 			</ul>
 			<div class="name_block">
-				<nav>
-					<ul class="likes">
-						<li><a><i class="fas fa-heart"></i></a>
-							<ul class="likes_li">
-								<li><a  id="likes_update"></a></li>
-							</ul>
-						</li>
-					</ul>	
+				<nav id="likes">
+						
 				</nav>
 				<h2><?php echo $row_user_page['name']; ?><span class="icons_users_page"><a><i class="fas fa-gift"></i></a></span></h2>
 				<br>
@@ -69,7 +63,7 @@ if (isset($row_user_page['date_birth']) && !empty($row_user_page['date_birth']))
 					<ul class="likes">
 						<li><a><i class="fas fa-coins"></i></a>
 							<ul class="likes_li">
-								<li><a  id="likes_update"></a></li>
+								<li><a  id="likes_update">154</a></li>
 							</ul>
 						</li>
 					</ul>	
@@ -84,5 +78,6 @@ if (isset($row_user_page['date_birth']) && !empty($row_user_page['date_birth']))
 		</div>
 		<script type="text/javascript">
 			page_users();
+			page_user_like();
 		</script>
 		<?php } ?>
