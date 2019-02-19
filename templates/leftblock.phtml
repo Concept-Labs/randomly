@@ -96,8 +96,7 @@ if ($_SERVER['REQUEST_URI'] != '/search_users') {
 		}
 	}
 	?>
-	<div class="left_sidebar">
-		<ul class="menu_left_icon">
+	<ul class="menu_left_icon">
 			<li><a href="<?php echo base_url .'news';?>" class="<?php if($current == '/news'): ?>current<?php endif; ?> tooltip_setting tooltip tooltip-right" data-tooltip=' <?php echo $tooltip_news ?>'>
 				<i class="fas fa-tape"></i>
 			</a>
@@ -120,6 +119,7 @@ if ($_SERVER['REQUEST_URI'] != '/search_users') {
 			<a href="<?php echo base_url .'information';?>" class="<?php if($current == '/information'): ?>current<?php endif; ?> tooltip_setting tooltip tooltip-right" data-tooltip=' <?php echo $tooltip_information ?>'><i class="fas fa-exclamation-circle"></i></a>
 		</li>
 	</ul>
+	<div class="left_sidebar">
 
 	<div class="avatar_block">
 		<form action="<?php echo base_url .'index';?>" method="post" enctype="multipart/form-data">

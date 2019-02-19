@@ -462,4 +462,6 @@
     right: 0;
     margin: auto;
 }
-
+#lightSlider_fate li{
+    list-style-type: none;
+}

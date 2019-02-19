@@ -3,7 +3,7 @@ body{
 	background: #f1f1f1;
 }
 main{
-	padding-bottom: 40px;
+	padding:23px 0 40px 0;
 	overflow: hidden;
 	width: 100%;
 	height: 100%;
@@ -124,7 +124,7 @@ i.fa-share-square{
 			width: 20px;
 			height: auto;
 			float: left;
-			margin: 0px 0 0 -40px;
+			margin: 10px 5px 0 0px;
 		}
 		.menu_left_icon li{
 			text-align: left;
@@ -172,7 +172,7 @@ i.fa-share-square{
 			float: right;
 		}
 		.left_sidebar{
-			margin:23px 10px 0 0;
+			margin:0 10px 0 0;
 			background: #fff;
 			float: left;
 			width: 255px;
@@ -350,29 +350,21 @@ i.fa-share-square{
 			background: #e6e6e6;
 			border-radius: 10px;
 		}
-
-
-
 		.search_person{
-			margin-right: 200px;
 			position: absolute;
-			margin-left: 785px;
+			margin: -20px 0 0 785px;
 			color: #A805C1;
 			font-weight: normal;
 		}
 		.right_block{
 			position: relative;
 			padding: 10px;
-			margin-top: 23px;
 			border-radius: 10px;
 			float: left;
 			height: auto;
 			overflow: hidden;
 			background: #fff;
 			width: 612px;
-		}
-		.right_block h3{
-
 		}
 		.right_sidebar textarea{
 			min-height: 57px;
@@ -544,7 +536,7 @@ i.fa-share-square{
 		}
 
 		.wrapper {
-			width: 1173px;
+			width: 1197px;
 			margin: auto;
 			background: #f1f1f1;
 			padding-top: 55px;
