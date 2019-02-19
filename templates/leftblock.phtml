@@ -161,12 +161,7 @@ if ($_SERVER['REQUEST_URI'] != '/search_users') {
 		</div>
 		<div class="name_block">
 			<nav>
-				<ul class="likes">
-					<li><a><i class="fas fa-heart"></i></a>
-						<ul class="likes_li">
-							<li><a  id="likes_update"></a></li>
-						</ul>
-					</li>
+				<ul class="likes" id="my_likes">
 				</ul>	
 			</nav>
 			<h2><?php echo $row_user['name']; ?></h2>
@@ -205,7 +200,6 @@ if ($_SERVER['REQUEST_URI'] != '/search_users') {
 			</div>
 			<script>
 				like_user();
-				setInterval(like_user,3000);
 				number_become_acquainted();
 				setInterval(number_become_acquainted,3000);
 				number_stroll();
@@ -218,3 +212,28 @@ if ($_SERVER['REQUEST_URI'] != '/search_users') {
 		</div>
 		<?php } ?>
 
+<script type="text/javascript">
+	var h_hght = 55; // высота шапки
+var h_mrg = 40;    // отступ когда шапка уже не видна
+
+$(function(){
+
+	var elem = $('.left_sidebar');
+	var top = $(this).scrollTop();
+
+	if(top > h_hght){
+		elem.css('top', h_mrg);
+	}           
+
+	$(window).scroll(function(){
+		top = $(this).scrollTop();
+
+		if (top+h_mrg < h_hght) {
+			elem.css('top', (h_hght-top));
+		} else {
+			elem.css('top', h_mrg);
+		}
+	});
+
+});
+</script>

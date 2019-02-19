@@ -32,9 +32,6 @@ $(document).ready(function() {
 });
 
 
-
-
-
 function open_gift_block()
 {
 	$(".present_gift_overlay").show();
@@ -86,3 +83,17 @@ function close_notification_block()
 	$("#notif_icon_close").hide();
 	$("#notif_icon").show();
 }
+
+$( document ).ready(setInterval(function(){
+	$.ajax({
+		type: "POST",
+		url: "js_files/popup_message_select.php",
+		data:"req=ok",
+		success: function(html)
+		{
+			$("#popup_message").empty();
+			$("#popup_message").append(html);
+			setTimeout(function(){$('.notice').fadeOut('fast')},4000);
+		}
+	});
+}, 1000));

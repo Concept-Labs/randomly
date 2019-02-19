@@ -131,7 +131,38 @@ function close_more_information_users()
 
 function long_news(button_long_news)
 {
-  var idnews = $(button_long_news).data('idnews');
-  $("#short_news_"+idnews).hide();
-  $("#long_news_"+idnews).show();
+	var idnews = $(button_long_news).data('idnews');
+	$("#short_news_"+idnews).hide();
+	$("#long_news_"+idnews).show();
+}
+
+function page_user_like()
+{
+	$.ajax({
+		type: "POST",
+		url:  "js_files/page_user_like_select.php",
+		data: "req=ok",
+                // Выводим то что вернул PHP
+                success: function(html)
+                {
+          //Очищаем форму ввода
+          $("#likes").empty();
+          //Выводим что вернул нам php
+          $("#likes").append(html);
+      }
+  });
+}
+
+function send_like(btn_like)
+{
+	var like_recipient = $(btn_like).data('email');
+	$.ajax({
+		type: "POST",
+		url: "js_files/like_users_insert.php",
+		data:"like_recipient="+like_recipient,
+		success: function(html)
+		{
+			page_user_like();
+		}
+	});
 }
