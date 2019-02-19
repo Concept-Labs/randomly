@@ -279,7 +279,31 @@
 .icons_users_page:hover{
 	opacity: 1;
 }
-
-.right_user_block .lSSlideOuter li{
+.right_user_block #lightSlider_fate li{
+	list-style-type: none;
+} 
+.right_user_block .lSGallery li{
 	height: 41px !important;
+}
+.counts_module{
+    text-align: center;
+    max-height: 69px;
+    overflow: hidden;
+    background: #f7f7f7;
+    border-radius: 10px;
+    font-style: normal;
+}
+.page_counter {
+    display: inline-block;
+    padding: 15px;
+}
+.page_counter .count {
+    font-size: 19px;
+    color: #A805C1;
+    padding-bottom: 3px;
+    line-height: 21px;
+}
+.page_counter .label {
+    line-height: 15px;
+    color: #828282;
 }
