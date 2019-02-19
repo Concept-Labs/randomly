@@ -279,3 +279,7 @@
 .icons_users_page:hover{
 	opacity: 1;
 }
+
+.right_user_block .lSSlideOuter li{
+	height: 41px !important;
+}
