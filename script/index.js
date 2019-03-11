@@ -91,9 +91,11 @@ $( document ).ready(setInterval(function(){
 		data:"req=ok",
 		success: function(html)
 		{
-			$("#popup_message").empty();
+			
 			$("#popup_message").append(html);
-			setTimeout(function(){$('.notice').fadeOut('fast')},4000);
+			
 		}
 	});
-}, 1000));
+	if ($('#popup_message').!empty()) {alert('ds');}
+	setTimeout(function(){$('.notice').fadeOut('fast')},4000);
+}, 700));

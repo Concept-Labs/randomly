@@ -5,8 +5,9 @@ if ($_SERVER['REQUEST_URI'] != '/search_users') {
 	$query_user = "SELECT * FROM `registered_users` WHERE email='$user_email'";
 	$result_user = mysqli_query($db, $query_user);
 	$row_user = mysqli_fetch_array($result_user); 
+	$now_date = date('Y-m-d');
 	if (isset($row_user['date_birth']) && !empty($row_user['date_birth'])) {
-		$now_date = strtotime(date('Y-m-d'));
+		$nowdate = strtotime(date('Y-m-d'));
 		$now_year = date('Y');
 		$date_birth  = strtotime($row_user['date_birth']);
 		$year_birth  = date_format(date_create($row_user['date_birth']), 'Y');
@@ -16,7 +17,7 @@ if ($_SERVER['REQUEST_URI'] != '/search_users') {
 				$number_leap_year += 1;
 			}
 		}
-		$day_user = floor(($now_date - $date_birth)/(60*60*24)-$number_leap_year);
+		$day_user = floor(($nowdate - $date_birth)/(60*60*24)-$number_leap_year);
 		$year_user = floor($day_user/365);
 	}
 	
@@ -40,7 +41,7 @@ if ($_SERVER['REQUEST_URI'] != '/search_users') {
 	$num_user_attempt_fate = mysqli_num_rows($result_user_attempt_fate);
 	$row_user_attempt_fate = mysqli_fetch_array($result_user_attempt_fate);
 	if ($num_user_attempt_fate == 0) {
-		$query_attempt_fate = "INSERT INTO `attempt_fate`(`id`, `email_user`, `attempt_user`, `date_attempt`) VALUES (null,'$email_user','3',NOW())";
+		$query_attempt_fate = "INSERT INTO `attempt_fate`(`id`, `email_user`, `attempt_user`, `date_attempt`) VALUES (null,'$email_user','3','NOW()')";
 		mysqli_query($db, $query_attempt_fate);
 	}
 	if ($row_user_attempt_fate['date_attempt'] != $now_date) {
